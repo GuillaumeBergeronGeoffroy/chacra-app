@@ -16,6 +16,10 @@ body { padding:0; margin:0; position:relative; color:#3a3d3c; }
     }
 }
 
+/* Display */
+.hide { display:none; }
+.show { display:unset; }
+
 /* Opacity */
 .opacity-1 { opacity: 1 !important; }
 .opacity-0 { opacity: 0 !important; }
@@ -67,6 +71,7 @@ h2 {
     font-size:26px;
     font-weight: 600;
     font-family: 'Quicksand', sans-serif;
+    line-height: 32px;
 }
 
 /* Box */
@@ -80,6 +85,7 @@ h2 {
     background: #fafffee2;
     /* opacity: 0.875; */
     transition: all 0.2s;
+    position:relative;
 }
 .box:hover { background: #fafffe; }
 
@@ -120,7 +126,11 @@ h2 {
 .w-5 { width:5%; }
 .w-0 { width:0%; }
 
+/* Paddings */
+.p-30 { padding:30px !important; }
+
 /* Margins */
+.m-0 { margin:0; }
 .m-top-5 { margin-top:5px; }
 .m-top-10 { margin-top:10px; }
 .m-top-15 { margin-top:15px; }

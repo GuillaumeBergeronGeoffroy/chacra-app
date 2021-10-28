@@ -20,21 +20,35 @@
         </div>
         <div class='landing-wrapper step2 flex-row justify-between'>
             <div class='box box-producer'>
-                <div class='box'>
-                    <h2 class='text-green'>Vous êtes agriculteur <span class='text-600'>?</span></h2>
-                    <p class='text-regular'>
-                        Notre marché d'argriculteurs vous offre un espace ou vous pouvez raconter votre histoire, assurer la pérennité de votre labeur, saison après saison et rejoindre une communauté de gens qui cherchent à choisir et agir pour le mieux
+                <div class='box first-b'>
+                    <h2 class='text-green'><span>V</span><span>o</span><span>u</span><span>s</span> <span>ê</span><span>t</span><span>e</span><span>s</span> <span>a</span><span>g</span><span>r</span><span>i</span><span>c</span><span>u</span><span>l</span><span>t</span><span>e</span><span>u</span><span>r</span> <span class='text-600'>?</span></h2>
+                    <p class='text-regular step2-text'>
+                        Notre marché d'argriculteurs vous offre un espace ou vous pouvez raconter votre histoire, assurer la pérennité de votre labeur et rejoindre une communauté de gens qui cherchent à choisir et à agir pour le mieux
                     </p>
                 </div>
-                <div @click='changeStep(1, "farmer")' class='button' style='margin-top:20px;'>Présentez-vous à la communauté</div>
+                <div class='box p-30 opacity-0 hide desc-b'>
+                    <p class='text-regular m-0'>
+                        Assurons-nous que vous ayez une place sur le marché au lancement, entrez vos informations et nous vous contacterons sous peu
+                    </p>
+                </div>
+                <div class='box p-30 opacity-0 hide name-b'></div>
+                <div class='box p-30 opacity-0 hide email-b'></div>
+                <div @click='changeStep(1, "producer")' class='button' style='margin-top:20px;'>Présentez-vous à la communauté</div>
             </div>
             <div class='box box-community'>
-                <div class='box'>
-                    <h2 class='text-brown'>Vous voulez manger local <span class='text-600'>?</span></h2>
-                    <p class='text-regular'>
-                        En adoptant la production saisonière des agriculteurs sur notre marché vous aidez à supporter la résilience de vos agriculteurs locaux tout en vous assurant de faire des choix de consommation qui réponde à vos critères
+                <div class='box first-b'>
+                    <h2 class='text-brown'><span>V</span><span>o</span><span>u</span><span>s</span> <span>v</span><span>o</span><span>u</span><span>l</span><span>e</span><span>z</span> <span>m</span><span>a</span><span>n</span><span>g</span><span>e</span><span>r</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span class='text-600'>?</span></h2>
+                    <p class='text-regular step2-text'>
+                        En adoptant la production saisonière des agriculteurs sur notre marché vous aidez à supporter la résilience de vos agriculteurs locaux tout en vous assurant de faire des choix de consommation qui répondent à vos critères
                     </p>
                 </div>
+                <div class='box p-30 opacity-0 hide desc-b'>
+                    <p class='text-regular m-0'>
+                       Réservez votre place pour avoir accès au marché en avant-première
+                    </p>
+                </div>
+                <div class='box p-30 opacity-0 hide name-b'></div>
+                <div class='box p-30 opacity-0 hide email-b'></div>
                 <div @click='changeStep(1, "community")' class='button bg-brown' style='margin-top:20px;'>Supportez vos agriculteurs locaux</div>
             </div>
         </div>
@@ -49,7 +63,6 @@
 var top = 35;
 var topStep2 = 238;
 var inTransition = false;
-var computeLeftPosition = false;
 
 export default {
     name: 'Landing',
@@ -141,18 +154,97 @@ export default {
                     // document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*3)+"vh";
                     // left only if window , in any case get them in display block after the transition is over
                     // will only have the inside transition if mobile
-                    computeLeftPosition = true;
-                    if(computeLeftPosition) console.log('ho')
+                    
+                    // const insideTransition = func()() 
                     inTransition = true;
                     top = 35;
-                    switch (context) {
-                        case 'producer':
-                            break;
-                        case 'community':
-                            break;
-                        default:
-                            break;
+                    topStep2 = 238;
+                    document.querySelector('.loading-wrapper').style.top = top + 'px'
+                    document.querySelector('.step2').style.top = topStep2 + 'px';
+                    var sign = '+';
+                    var other = 'community';
+                    var contextCta = "Entamez la discussion";
+                    if(context == 'community') {
+                        sign = '-';
+                        other = 'producer';
+                        contextCta = 'Réservez votre place';
                     }
+                    var insideAnimation = function() {
+                        setTimeout(() => {
+                            document.querySelector('.box-'+context + ' h2').style.marginTop = '250px';
+                            // document.querySelector('.box-'+context + ' .step2-text').style.marginTop = '0px';
+                            // document.querySelector('.box-'+context + ' .step2-text').style.height = document.querySelector('.box-'+context + ' .step2-text').offsetHeight + 'px';
+                            document.querySelector('.box-'+context + ' .step2-text').style.opacity = '0';
+                            document.querySelector('.box-'+context + ' .step2-text').style.pointerEvents = 'none';
+                            document.querySelector('.box-'+context +' .button').style.opacity = 0;
+                            // document.querySelector('.box-'+context + ' .step2-text').style.marginTop = '-' + document.querySelector('.box-'+context + ' .step2-text').offsetHeight + 'px';
+                            // document.querySelector('.box-'+context + ' .step2-text').style.marginBottom = '0px';
+                        }, 600);
+                        setTimeout(() => {
+                            // document.querySelector('.box-'+context + ' .step2-text').textContent = "Restez à l'affut des derniers avancements dans le projet en remplissant le formulaire de contact ci-dessous et réserver votre place pour avoir accès au marché en avant-première."
+                            // document.querySelector('.box-'+context + ' .step2-text').style.opacity = '1';
+                            document.querySelector('.box-'+context + ' h2').style.transition = 'all 0.2s';
+                            const animChar = async function() {
+                                var elem = document.querySelectorAll('.box-'+context + ' h2 span:not(.opacity-0)');
+                                if(elem.length) {
+                                    await new Promise(r => setTimeout(r, 40)).then(() => {
+                                        elem[0].classList.add('opacity-0');
+                                        animChar();
+                                    })
+                                } else {
+                                    document.querySelector('.box-'+context + ' h2 span:last-of-type').innerHTML =  "&#10084";
+                                    const animChar = async function() {
+                                        var elem = document.querySelector('.box-'+context + ' h2 span.opacity-0');
+                                        if(elem) {
+                                            await new Promise(r => setTimeout(r, 40)).then(() => {
+                                                elem.classList.remove('opacity-0');
+                                                animChar();
+                                            })
+                                        } else {
+                                            document.querySelector('.box-'+context + ' .step2-text').style.transition = 'all 1s';
+                                            document.querySelector('.box-'+context + ' h2').style.transition = 'all 1s';
+                                            document.querySelector('.box-'+context + ' .first-b').style.paddingBottom = '30px';
+                                            document.querySelector('.box-'+context + ' h2').style.marginTop = '0px';
+                                            document.querySelector('.box-'+context + ' .step2-text').style.marginTop = '-' + document.querySelector('.box-'+context + ' .step2-text').offsetHeight + 'px';
+                                            document.querySelector('.box-'+context + ' .step2-text').style.marginBottom = '0px';
+                                            
+                                            document.querySelector('.box-'+context +' .desc-b').classList.remove('hide');
+                                            document.querySelector('.box-'+context +' .name-b').classList.remove('hide');
+                                            document.querySelector('.box-'+context +' .email-b').classList.remove('hide');
+
+                                            document.querySelector('.box-'+context +' .desc-b').classList.remove('opacity-0');
+                                            document.querySelector('.box-'+context +' .name-b').classList.remove('opacity-0');
+                                            document.querySelector('.box-'+context +' .email-b').classList.remove('opacity-0');
+
+                                            document.querySelector('.box-'+context +' .button').textContent = contextCta
+                                            document.querySelector('.box-'+context +' .button').style.opacity = 1;
+
+                                            inTransition = false;
+                                        }
+                                    }
+                                    animChar()
+                                }
+                            }
+                            animChar()
+                            // document.querySelector('.box-'+context + ' h2').innerHTML = "&#10084;";
+                        }, 1100); 
+                    }
+                    if(window.innerWidth > 1060) {
+                        var boxWidth = document.querySelector('.box-'+context).offsetWidth
+                        document.querySelector('.step2').style.left = 'calc(50% ' + sign + ' ' + ((boxWidth/2) + 40) + 'px)';
+                        document.querySelector('.box-'+other).style.transition = 'all 0.5s';
+                        document.querySelector('.box-'+context + ' .step2-text').style.transition = 'all 0.5s';
+                        document.querySelector('.box-'+context + ' h2').style.transition = 'all 0.5s';
+                        setTimeout(() => {
+                            document.querySelector('.box-'+other).style.opacity = '0';
+                        }, 100);
+                        insideAnimation()
+                    } else {
+                        insideAnimation()
+                    }
+                   
+                    // top = 35;
+                    
                     // document.querySelector('.loading-wrapper').style.top = top + 'px'
                     // setTimeout(() => {
                     //     document.querySelector('.step1').style.transition = 'all 0.5s';
@@ -207,7 +299,7 @@ export default {
                 top += change;
                 
                 document.querySelector('.loading-wrapper').style.top = top + 'px';
-                if(this.step == 1) {
+                if(this.step == 1 || this.step == 2) {
                     topStep2 += change;
                     document.querySelector('.step2').style.top = topStep2 + 'px';
                 }
@@ -324,12 +416,25 @@ export default {
         background:#FFFFFF00;
         box-shadow:unset;
     }
-
     .box.box-producer .box, .box.box-community .box {
         padding: 30px;
         padding-bottom:50px;
         border-radius:4px;
     }
+    /* .bubble {
+        opacity:0;
+        position:absolute;
+        width:225px;
+        height:225px;
+        top:-25px;
+        left:calc(50% - 112.5px);
+        transition: all 0.5s;
+        border-radius:300px;
+    }
+    .bubble-community {
+        background: url("../asset/images/farmer_market.jpg") no-repeat center;
+        background-size: cover;
+    } */
 
 @media only screen and (max-width: 1060px) {
     .landing-wrapper.step2 {
