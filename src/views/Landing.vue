@@ -21,7 +21,8 @@
         <div class='landing-wrapper step2 flex-row justify-between'>
             <div class='box box-producer'>
                 <div class='box first-b'>
-                    <h2 class='text-green'><span>V</span><span>o</span><span>u</span><span>s</span> <span>ê</span><span>t</span><span>e</span><span>s</span> <span>a</span><span>g</span><span>r</span><span>i</span><span>c</span><span>u</span><span>l</span><span>t</span><span>e</span><span>u</span><span>r</span> <span class='text-600'>?</span></h2>
+                    <img style='height:230px;' src='../asset/images/farmers.png' />
+                    <h2 class='text-green m-top-10'><span>V</span><span>o</span><span>u</span><span>s</span> <span>ê</span><span>t</span><span>e</span><span>s</span> <span>a</span><span>g</span><span>r</span><span>i</span><span>c</span><span>u</span><span>l</span><span>t</span><span>e</span><span>u</span><span>r</span> <span class='text-600'>?</span></h2>
                     <p class='text-regular step2-text'>
                         Notre marché d'argriculteurs vous offre un espace ou vous pouvez raconter votre histoire, assurer la pérennité de votre labeur et rejoindre une communauté de gens qui cherchent à choisir et à agir pour le mieux
                     </p>
@@ -37,9 +38,10 @@
             </div>
             <div class='box box-community'>
                 <div class='box first-b'>
-                    <h2 class='text-brown'><span>V</span><span>o</span><span>u</span><span>s</span> <span>v</span><span>o</span><span>u</span><span>l</span><span>e</span><span>z</span> <span>m</span><span>a</span><span>n</span><span>g</span><span>e</span><span>r</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span class='text-600'>?</span></h2>
+                    <img style='height:230px;' src='../asset/images/family.png' />
+                    <h2 class='text-brown m-top-10'><span>V</span><span>o</span><span>u</span><span>s</span> <span>v</span><span>o</span><span>u</span><span>l</span><span>e</span><span>z</span> <span>m</span><span>a</span><span>n</span><span>g</span><span>e</span><span>r</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span class='text-600'>?</span></h2>
                     <p class='text-regular step2-text'>
-                        En adoptant la production saisonière des agriculteurs sur notre marché vous aidez à supporter la résilience de vos agriculteurs locaux tout en vous assurant de faire des choix de consommation qui répondent à vos critères
+                        En adoptant la production saisonière des agriculteurs sur le marché, vous aidez à supporter la résilience de vos agriculteurs locaux tout en vous assurant de faire des choix de consommation qui répondent à vos critères
                     </p>
                 </div>
                 <div class='box p-30 opacity-0 hide desc-b'>
@@ -163,7 +165,7 @@ export default {
                     document.querySelector('.step2').style.top = topStep2 + 'px';
                     var sign = '+';
                     var other = 'community';
-                    var contextCta = "Entamez la discussion";
+                    var contextCta = "Entamez le dialogue";
                     if(context == 'community') {
                         sign = '-';
                         other = 'producer';
@@ -171,9 +173,11 @@ export default {
                     }
                     var insideAnimation = function() {
                         setTimeout(() => {
-                            document.querySelector('.box-'+context + ' h2').style.marginTop = '250px';
+                            document.querySelector('.box-'+context + ' h2').style.marginTop = '10px';
                             // document.querySelector('.box-'+context + ' .step2-text').style.marginTop = '0px';
                             // document.querySelector('.box-'+context + ' .step2-text').style.height = document.querySelector('.box-'+context + ' .step2-text').offsetHeight + 'px';
+                            document.querySelector('.box-'+context + ' img').style.transition = 'all 0.5s';
+                            document.querySelector('.box-'+context + ' img').style.opacity = '0';
                             document.querySelector('.box-'+context + ' .step2-text').style.opacity = '0';
                             document.querySelector('.box-'+context + ' .step2-text').style.pointerEvents = 'none';
                             document.querySelector('.box-'+context +' .button').style.opacity = 0;
@@ -202,9 +206,11 @@ export default {
                                             })
                                         } else {
                                             document.querySelector('.box-'+context + ' .step2-text').style.transition = 'all 1s';
+                                            document.querySelector('.box-'+context + ' img').style.transition = 'all 1s';
                                             document.querySelector('.box-'+context + ' h2').style.transition = 'all 1s';
                                             document.querySelector('.box-'+context + ' .first-b').style.paddingBottom = '30px';
-                                            document.querySelector('.box-'+context + ' h2').style.marginTop = '0px';
+                                            document.querySelector('.box-'+context + ' h2').style.marginTop = '-15px';
+                                            document.querySelector('.box-'+context + ' img').style.height = '0px'
                                             document.querySelector('.box-'+context + ' .step2-text').style.marginTop = '-' + document.querySelector('.box-'+context + ' .step2-text').offsetHeight + 'px';
                                             document.querySelector('.box-'+context + ' .step2-text').style.marginBottom = '0px';
                                             
