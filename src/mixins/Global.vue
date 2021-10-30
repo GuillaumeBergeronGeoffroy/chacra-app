@@ -35,17 +35,12 @@
             
         },
         created: function () {
-            window.addEventListener('resize', this.handleResize)
-            this.handleResize();
+            
         },
         destroyed: function () {
-            window.removeEventListener('resize', this.handleResize)
+           
         },
         methods: {
-            handleResize: function () {
-                this.window.width = window.innerWidth;
-                this.window.height = window.innerHeight;
-            },
             isEmailValid: (email) => {
                 if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
                     return true;

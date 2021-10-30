@@ -16,14 +16,6 @@ body { padding:0; margin:0; position:relative; color:#3a3d3c; }
     }
 }
 
-/* Display */
-.hide { display:none; }
-.show { display:unset; }
-
-/* Opacity */
-.opacity-1 { opacity: 1 !important; }
-.opacity-0 { opacity: 0 !important; }
-
 /* Position */
 .pos-rel { position: relative; }
 .pos-abs { position: absolute; }
@@ -141,6 +133,8 @@ input:focus::placeholder {
 
 /* Paddings */
 .p-30 { padding:30px !important; }
+.p-0 { padding:0px !important; }
+.p-bot-40 { padding-bottom:40px; }
 
 /* Margins */
 .m-0 { margin:0; }
@@ -188,3 +182,16 @@ button:hover, div .button:hover {
 
 /* Backgrounds */
 .bg-brown { background: #313131 !important; }
+
+/* Transitions */
+.t-1000 { transition:all 1s; }
+.t-500 { transition:all 0.5s; }
+.t-200 { transition:all 0.2s; }
+
+/* Display */
+.hide { display:none; }
+.show { display:unset; }
+
+/* Opacity */
+.opacity-1 { opacity: 1 !important; }
+.opacity-0 { opacity: 0 !important; }

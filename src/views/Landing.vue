@@ -12,10 +12,34 @@
              </div>
             <h1 class='armatic text-center'><span>C</span><span>h</span><span>a</span><span>c</span><span>r</span><span>a</span> <span>C</span><span>r</span><span>o</span><span>w</span><span>d</span><span>F</span><span>a</span><span>r</span><span>m</span><span>i</span><span>n</span><span>g</span></h1>
             <div class='landing-wrapper step1'>
-                <div class='box text-regular'>
-                    Chacra CrowdFarming ambitionne transformer la nature des chaînes d’approvisionnement alimentaire nord-américaine par l'innovation numérique. Nous croyons en une agriculture et une consommation alimentaire plus responsable, caractérisé par une industrie biologique, locale et humaine. C’est pourquoi nous plaçons les agriculteurs au centre de notre mission sociale.
+                <div class='box p-bot-40'>
+                    <p class='text-regular m-0 step1-text'>
+                        Chacra CrowdFarming ambitionne transformer la nature des chaînes d’approvisionnements alimentaires en facilitant la vente directe grâce à l'innovation numérique. Nous croyons en une agriculture et une consommation alimentaire plus responsable, caractérisé par une industrie biologique, locale et humaine. C’est pourquoi nous plaçons les agriculteurs au centre de notre mission sociale.
+                    </p>
+                    <p class='text-regular m-0 opacity-0 pos-abs disable-click t-1000'>
+                        Les agriculteurs s'inscrivent et nous les accompagnons dans la personnalisation de leur profil pour que l'image qu'ils présentent soit la plus authentique que possible. 
+                    </p>
+                    <p class='text-regular m-0 opacity-0 pos-abs disable-click t-1000'>
+                        Ils définissent les unités, les prix et les disponibilités de leurs produits en fonction des prévisions de leur production saisonnière.
+                    </p>
+                    <p class='text-regular m-0 opacity-0 pos-abs disable-click t-1000'>
+                        Les membres de la communauté consultent les profils et produits des agriculteurs et en adoptent une partie. 
+                    </p>
+                    <p class='text-regular m-0 opacity-0 pos-abs disable-click t-1000'>
+                        Quand le temps de la récolte approche, les deux parties coordonnent les moyens de l'acheminement des produits.
+                    </p>
+                    <p class='text-regular m-0 opacity-0 pos-abs disable-click t-1000'>
+                        Les produits sont acheminés de l'agriculteur au membre de la communauté.
+                    </p>
+                    <div class='flex-row opacity-0 t-500 anim-steps-nav justify-center'>
+                        <span class='active' @click="animSteps(1, true)"></span>
+                        <span  @click="animSteps(2, true)"></span>
+                        <span  @click="animSteps(3, true)"></span>
+                        <span  @click="animSteps(4, true)"></span>
+                        <span  @click="animSteps(5, true)"></span>
+                    </div>
                 </div>
-                <div @click='changeStep()' class='button' style='width:350px;margin-top:50px;'>Joignez-vous à nous</div>
+                <div @click='changeStep()' class='button' style='width:350px;margin-top:50px;'>Comment ça marche ?</div>
             </div>
         </div>
         <div class='landing-wrapper step2 flex-row justify-between'>
@@ -66,7 +90,9 @@
 
 var top = 35;
 var topStep2 = 238;
-var inTransition = 238;
+var inTransition = false;
+var completedAnim = false;
+var animStep = 0;
 
 export default {
     name: 'Landing',
@@ -74,7 +100,7 @@ export default {
         return {
             step: 0,
             name: "",
-            email: ""
+            email: "",
         }
     },
     components: {
@@ -90,7 +116,7 @@ export default {
             var vue_obj = this;
             document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale)+"vh";
             const animChar = async function() {
-                var elem = document.querySelector(".loading-wrapper span:not(.opacity-1)");
+                var elem = document.querySelector(".loading-wrapper span:not(.opacity-1):not(.anim-steps-nav span)");
                 if(elem) {
                     await new Promise(r => setTimeout(r, 40)).then(() => {
                         elem.classList.add('opacity-1');
@@ -130,13 +156,39 @@ export default {
             
         },
         changeStep: function(direction = 1, context = null) {
+            var vue_obj = this;
             switch (this.step + direction) {
                 case 0:
                     document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale)+"vh";
                     this.step += direction
                     break;
-                case 1: 
+                case 1:
                     document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*3)+"vh";
+                    inTransition = true;
+                    top = 35;
+                    document.querySelector('.loading-wrapper').style.top = top + 'px'
+                    document.querySelector('.step1-text').style.transition = 'all 0.5s';
+                    document.querySelector('.step1 .button').style.opacity = '0';
+                    document.querySelector('.step1 .button').style.pointerEvents = 'none';
+                    document.querySelector('.step1-text').style.height = document.querySelector('.step1-text').offsetHeight + 'px';
+                    document.querySelector('.step1-text').style.opacity = '0';
+                    document.querySelector('.step1-text').style.pointerEvents = 'none';
+                    setTimeout(() => {
+                        document.querySelector('.anim-steps-nav').classList.remove('hide');
+                        // document.querySelector('.anim-steps-nav').classList.remove('opacity-0');
+                        setTimeout(() => {
+                            // document.querySelector('.anim-steps-nav').classList.remove('hide');
+                            document.querySelector('.step1-text').style.height = (document.querySelector('.step1-text').offsetHeight + 150) + 'px';
+                            document.querySelector('.anim-steps-nav').classList.remove('opacity-0');
+                            vue_obj.animSteps(1);
+                            // document.querySelector('.anim-steps-nav').style.marginTop = '30px';
+                        }, 100);
+                    }, 200);
+                    inTransition = false;
+                    this.step += direction
+                    break;
+                case 2: 
+                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*6)+"vh";
                     inTransition = true;
                     top = 35;
                     document.querySelector('.loading-wrapper').style.top = top + 'px'
@@ -156,13 +208,12 @@ export default {
                     }, 800);
                     this.step += direction
                     break;
-                case 2: 
+                case 3: 
                     // document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*3)+"vh";
                     // left only if window , in any case get them in display block after the transition is over
                     // will only have the inside transition if mobile
                     
                     // const insideTransition = func()() 
-                    var vue_obj = this;
                     inTransition = true;
                     top = 35;
                     topStep2 = 238;
@@ -285,6 +336,49 @@ export default {
                     break;
                 default:
                     break;
+            }
+        },
+        animSteps: function(newStep, stopAuto = false) {
+            if(newStep != animStep && !inTransition) {
+                var vue_obj = this;
+                inTransition = true;
+                document.querySelector('.anim-steps-nav').style.pointerEvents = 'none';
+                if(animStep > 0) {
+                    document.querySelector('.step1 p.pos-abs:nth-of-type('+(animStep+1)+')').classList.add('disable-click');
+                    document.querySelector('.step1 p.pos-abs:nth-of-type('+(animStep+1)+')').classList.add('opacity-0');
+                    document.querySelector('.step1 p.pos-abs:nth-of-type('+(animStep+1)+')').style.bottom = '55px';
+                }
+                setTimeout(() => {
+                    document.querySelector('.step1 p.pos-abs:nth-of-type('+(newStep+1)+')').classList.remove('disable-click');
+                    document.querySelector('.step1 p.pos-abs:nth-of-type('+(newStep+1)+')').classList.remove('opacity-0');
+                    document.querySelector('.step1 p.pos-abs:nth-of-type('+(newStep+1)+')').style.bottom = '85px';
+                    document.querySelector('.anim-steps-nav span.active').classList.remove('active');
+                    document.querySelector('.anim-steps-nav span:nth-of-type('+newStep+')').classList.add('active');
+                }, 250);   
+                setTimeout(() => {
+                    if(animStep > 0) {
+                        document.querySelector('.step1 p.pos-abs:nth-of-type('+(animStep+1)+')').style.bottom = '135px';
+                    } else {
+                        document.querySelector('.step1 .button').textContent = "Joignez-vous à nous";                   
+                    }
+                    animStep = newStep;
+                }, 1000);   
+                setTimeout(() => {
+                    inTransition = false;
+                    document.querySelector('.anim-steps-nav').style.pointerEvents = 'auto';
+                    if(newStep == 5 || stopAuto == true) {
+                        completedAnim = true;
+                        document.querySelector('.step1 .button').style.opacity = '1';     
+                        document.querySelector('.step1 .button').style.pointerEvents = 'auto';                   
+                    } else {
+                        setTimeout(() => {
+                            if(!completedAnim && !stopAuto) {
+                                vue_obj.animSteps(newStep+1);
+                            } 
+                        }, 5000);    
+                    }
+                }, 2000);
+                                                  
             }
         },
         registerScroll: function() {
@@ -458,6 +552,34 @@ export default {
         background: url("../asset/images/farmer_market.jpg") no-repeat center;
         background-size: cover;
     } */
+    .anim-steps-nav {
+        /* margin-top:100px; */
+    }
+    .anim-steps-nav span {
+        width:15px;
+        height:15px;
+        background:#FFFFFF;
+        border:2px solid #46b056;
+        margin:1px;
+        border-radius:100px;
+        opacity:0.5;
+        cursor: pointer;
+        transition:all 0.2s;
+    }
+    .anim-steps-nav span.active {
+        border-color:#46b056;
+        background:#46b056;
+        opacity:1;
+    }
+    .anim-steps-nav span:hover:not(.active) {
+        opacity:0.75;
+    }
+    .step1 p.pos-abs {
+        bottom: 135px;
+        left: 50%;
+        width: calc(100% - 100px);
+        transform: translateX(-50%);
+    }
 
 @media only screen and (max-width: 1060px) {
     .landing-wrapper.step2 {
