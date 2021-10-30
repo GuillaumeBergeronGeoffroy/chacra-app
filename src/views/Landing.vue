@@ -13,7 +13,7 @@
             <h1 class='armatic text-center'><span>C</span><span>h</span><span>a</span><span>c</span><span>r</span><span>a</span> <span>C</span><span>r</span><span>o</span><span>w</span><span>d</span><span>F</span><span>a</span><span>r</span><span>m</span><span>i</span><span>n</span><span>g</span></h1>
             <div class='landing-wrapper step1'>
                 <div class='box text-regular'>
-                    Chacra CrowdFarming ambitionne transformer la nature des chaînes d’approvisionnement alimentaire nord-américaine par l'innovation numérique. Notre modèle simplifie la chaîne d’approvisionnement alimentaire et offre aux producteurs agroalimentaires un canal de vente E-Commerce direct pour soutenir leurs activités de commercialisation. Un modèle inclusif par affiliation qui permet de revaloriser les métiers agricoles.
+                    Chacra CrowdFarming ambitionne transformer la nature des chaînes d’approvisionnement alimentaire nord-américaine par l'innovation numérique. Nous croyons en une agriculture et une consommation alimentaire plus responsable, caractérisé par une industrie biologique, locale et humaine. C’est pourquoi nous plaçons les agriculteurs au centre de notre mission sociale.
                 </div>
                 <div @click='changeStep()' class='button' style='width:350px;margin-top:50px;'>Joignez-vous à nous</div>
             </div>
@@ -21,37 +21,39 @@
         <div class='landing-wrapper step2 flex-row justify-between'>
             <div class='box box-producer'>
                 <div class='box first-b'>
-                    <img style='height:230px;' src='../asset/images/farmers.png' />
+                    <img style='height:210px;' src='../asset/images/farmers.png' />
                     <h2 class='text-green m-top-10'><span>V</span><span>o</span><span>u</span><span>s</span> <span>ê</span><span>t</span><span>e</span><span>s</span> <span>a</span><span>g</span><span>r</span><span>i</span><span>c</span><span>u</span><span>l</span><span>t</span><span>e</span><span>u</span><span>r</span> <span class='text-600'>?</span></h2>
                     <p class='text-regular step2-text'>
-                        Notre marché d'argriculteurs vous offre un espace ou vous pouvez raconter votre histoire, assurer la pérennité de votre labeur et rejoindre une communauté de gens qui cherchent à choisir et à agir pour le mieux
+                       <!-- Notre plateforme vous offre un espace où vous pouvez raconter votre histoire, rejoindre une communauté de gens qui cherchent à choisir et à agir pour le mieux et assurer l'écoulement du fruit de votre labeur -->
+                        <!-- Notre plateforme vous offre un espace ou vous pouvez raconter votre histoire à une communauté de gens qui cherchent à choisir et à agir pour le mieux pour que vous puissiez sécuriser la pérennité de votre labeur -->
+                        Notre plateforme vous offre un espace ou vous pouvez raconter votre histoire à une communauté de gens qui cherchent à choisir et à agir pour le mieux. Nous voulons vous aider à sécuriser la pérennité de votre labeur.
                     </p>
                 </div>
                 <div class='box p-30 opacity-0 hide desc-b'>
                     <p class='text-regular m-0'>
-                        Assurons-nous que vous ayez une place sur le marché au lancement, entrez vos informations et nous vous contacterons sous peu
+                        Assurons votre place sur la plateforme au lancement, entrez vos informations et nous vous contacterons sous peu
                     </p>
                 </div>
-                <div class='box p-30 opacity-0 hide name-b'></div>
-                <div class='box p-30 opacity-0 hide email-b'></div>
-                <div @click='changeStep(1, "producer")' class='button' style='margin-top:20px;'>Présentez-vous à la communauté</div>
+                <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
+                <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
+                <div @click='changeStep(1, "producer")' :class="{ disable: !evalInTransition() && step == 2 && (!name.trim() || !$root.isEmailValid(email)) }" class='button' style='margin-top:20px;'>Présentez-vous à la communauté</div>
             </div>
             <div class='box box-community'>
                 <div class='box first-b'>
-                    <img style='height:230px;' src='../asset/images/family.png' />
-                    <h2 class='text-brown m-top-10'><span>V</span><span>o</span><span>u</span><span>s</span> <span>v</span><span>o</span><span>u</span><span>l</span><span>e</span><span>z</span> <span>m</span><span>a</span><span>n</span><span>g</span><span>e</span><span>r</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span class='text-600'>?</span></h2>
+                    <img style='height:210px;' src='../asset/images/family.png' />
+                    <h2 class='text-brown m-top-10'><span>V</span><span>o</span><span>u</span><span>s</span> <span>a</span><span>i</span><span>m</span><span>e</span><span>z</span> <span>m</span><span>a</span><span>n</span><span>g</span><span>e</span><span>r</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span class='text-600'>?</span></h2>
                     <p class='text-regular step2-text'>
-                        En adoptant la production saisonière des agriculteurs sur le marché, vous aidez à supporter la résilience de vos agriculteurs locaux tout en vous assurant de faire des choix de consommation qui répondent à vos critères
+                        En adoptant la production saisonière de vos agriculteurs locaux sur la plateforme, vous supportez directement leur projet tout en vous assurant de faire des choix de consommations qui répondent à vos critères.
                     </p>
                 </div>
                 <div class='box p-30 opacity-0 hide desc-b'>
                     <p class='text-regular m-0'>
-                       Réservez votre place pour avoir accès au marché en avant-première
+                       Réservez votre place pour avoir accès à la plateforme en avant-première
                     </p>
                 </div>
-                <div class='box p-30 opacity-0 hide name-b'></div>
-                <div class='box p-30 opacity-0 hide email-b'></div>
-                <div @click='changeStep(1, "community")' class='button bg-brown' style='margin-top:20px;'>Supportez vos agriculteurs locaux</div>
+                <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
+                <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
+                <div @click='changeStep(1, "community")' :class="{ disable: !evalInTransition() && step == 2 && (!name.trim() || !$root.isEmailValid(email)) }" class='button bg-brown' style='margin-top:20px;'>Supportez vos agriculteurs locaux</div>
             </div>
         </div>
         <div class='bottom-wrapper'>
@@ -64,13 +66,15 @@
 
 var top = 35;
 var topStep2 = 238;
-var inTransition = false;
+var inTransition = 238;
 
 export default {
     name: 'Landing',
     data: function() {
         return {
             step: 0,
+            name: "",
+            email: ""
         }
     },
     components: {
@@ -158,6 +162,7 @@ export default {
                     // will only have the inside transition if mobile
                     
                     // const insideTransition = func()() 
+                    var vue_obj = this;
                     inTransition = true;
                     top = 35;
                     topStep2 = 238;
@@ -209,6 +214,7 @@ export default {
                                             document.querySelector('.box-'+context + ' img').style.transition = 'all 1s';
                                             document.querySelector('.box-'+context + ' h2').style.transition = 'all 1s';
                                             document.querySelector('.box-'+context + ' .first-b').style.paddingBottom = '30px';
+
                                             document.querySelector('.box-'+context + ' h2').style.marginTop = '-15px';
                                             document.querySelector('.box-'+context + ' img').style.height = '0px'
                                             document.querySelector('.box-'+context + ' .step2-text').style.marginTop = '-' + document.querySelector('.box-'+context + ' .step2-text').offsetHeight + 'px';
@@ -222,10 +228,19 @@ export default {
                                             document.querySelector('.box-'+context +' .name-b').classList.remove('opacity-0');
                                             document.querySelector('.box-'+context +' .email-b').classList.remove('opacity-0');
 
+                                           
+
                                             document.querySelector('.box-'+context +' .button').textContent = contextCta
                                             document.querySelector('.box-'+context +' .button').style.opacity = 1;
 
+                                            // setTimeout(() => {
+                                            //     document.querySelector('.box-'+context + ' .first-b').style.transition = 'all 0.5s';
+                                            //     document.querySelector('.box-'+context + ' .first-b').style.background = '#fafffe00';
+                                            //     document.querySelector('.box-'+context + ' .first-b').style.boxShadow = 'none';
+                                            // }, 650); 
+
                                             inTransition = false;
+                                            vue_obj.$forceUpdate();                                            
                                         }
                                     }
                                     animChar()
@@ -289,14 +304,14 @@ export default {
                         if(event.deltaY > 0) {
                             change -= 50;
                         } else if(event.deltaY < 0 && top < 35) {
-                            change += 50;
+                            change += Math.min(50, (top * -1) + 35);
                         }
                         break;
                     case 'keydown':
                         if(event.key == 'ArrowDown') {
                             change -= 50;
                         } else if(event.key == 'ArrowUp' && top < 35) {
-                            change += 50;
+                            change += Math.min(50, (top * -1) + 35);
                         }
                         break;
                     default:
@@ -318,7 +333,9 @@ export default {
             //         inScroll = false;
             //     }
             }
-            
+        },
+        evalInTransition: () => {
+            return inTransition;
         }
     },
 }

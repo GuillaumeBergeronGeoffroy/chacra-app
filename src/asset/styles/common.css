@@ -89,6 +89,19 @@ h2 {
 }
 .box:hover { background: #fafffe; }
 
+/* Input */
+input {
+    border:none;
+    width:100%;
+    background:#ffffff00;
+}
+input:focus {
+    outline: none;
+}
+input:focus::placeholder {
+    color: transparent;
+}
+
 /* Display */
 .flex-row { display:flex; flex-direction: row; }
 .flex-column { display:flex; flex-direction: column; }
@@ -168,6 +181,10 @@ button:hover, div .button:hover {
     /* background: #46b056; */
 }
 
+/* Behaviour */
+.clickable { pointer-events:auto; cursor: pointer; }
+.disable { pointer-events:none; opacity:0.5 !important; }
+.disable-click { pointer-events:none; }
 
 /* Backgrounds */
 .bg-brown { background: #313131 !important; }
