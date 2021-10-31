@@ -89,6 +89,7 @@
 
 <script>
 // @ is an alias to /src
+
 import farm1 from '@/asset/images/landing/farms/farm1.jpg'
 import farm2 from '@/asset/images/landing/farms/farm2.jpg'
 import farm3 from '@/asset/images/landing/farms/farm3.jpg'
@@ -129,6 +130,7 @@ var completedAnim = false;
 var animStep = 0;
 var darkMode = false;
 var saveOpacity = 1;
+var farmNum = 1;
 
 export default {
     name: 'Landing',
@@ -150,13 +152,13 @@ export default {
     methods: {
         init: async function() {
             var vue_obj = this;
-            var num = Math.ceil(Math.random() * 29);
+            farmNum = Math.ceil(Math.random() * 1);
             var image = new Image();
             image.onload = function () {
                 document.querySelector('.bottom-wrapper').style.background = 'url(' + image.src + ') no-repeat center';
                 document.querySelector('.bottom-wrapper').style.backgroundSize = 'cover'
             }
-            switch (num) {
+            switch (farmNum) {
                 case 1:
                     image.src = farm1;
                     break;
@@ -286,12 +288,13 @@ export default {
                 document.querySelector('.image-container img:nth-of-type(6)').style.opacity = '1';
             }, 400);
             setTimeout(() => {
-                document.querySelector('.bottom-wrapper').style.opacity = '1';
+                // document.querySelector('.bottom-wrapper').style.opacity = '1';
             }, 1000)
             setTimeout(() => {
                 document.querySelector('.loading-wrapper').style.top = '35px';
             }, 1600);
             setTimeout(() => {
+                                document.querySelector('.bottom-wrapper').style.opacity = '1';
                 document.querySelector('.step1').style.opacity = '1';
                 document.querySelector('.step1').style.top = '213px';
                 vue_obj.registerScroll();
@@ -305,7 +308,7 @@ export default {
                     break;
                 case 1:
                     document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*3)+"vh";
-                    document.querySelector('.bottom-wrapper').style.opacity = '0.75';
+                    // document.querySelector('.bottom-wrapper').style.opacity = '0.75';
                     inTransition = true;
                     top = 35;
                     document.querySelector('.loading-wrapper').style.top = top + 'px'
@@ -330,8 +333,8 @@ export default {
                     this.step += direction
                     break;
                 case 2: 
-                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*5)+"vh";
-                    document.querySelector('.bottom-wrapper').style.opacity = '0.5';
+                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*6)+"vh";
+                    // document.querySelector('.bottom-wrapper').style.opacity = '0.5';
                     document.querySelector('.step1').style.pointerEvents = 'none';
                     document.querySelector('.anim-steps-nav').style.pointerEvents = 'none';
                     document.querySelector('.step1 p.pos-abs:not(.disable-click)').style.pointerEvents = 'none';
