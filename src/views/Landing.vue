@@ -1,8 +1,10 @@
 <template>
     <div id='cw' :style='{zoom: $root.scale, "height": (100/$root.scale)+"vh"}'>
         <div class='loading-wrapper'>
-             <div class='loading-circle'></div>
-             <div class='image-container pos-abs'>
+             <div class='loading-circle t-500 clickable' @click='toggleDarkMode()'>
+                 <!-- <img class='moon opacity-0' src='../asset/images/moon.png' /> -->
+             </div>
+             <div class='image-container pos-abs clickable' @click='toggleDarkMode()'>
                 <img src='../asset/images/tree.png' />
                 <img src='../asset/images/tree1.png' />
                 <img src='../asset/images/tree2.png' />
@@ -23,7 +25,7 @@
                         Ils définissent les unités, les prix et les disponibilités de leurs produits en fonction des prévisions de leur production saisonnière.
                     </p>
                     <p class='text-regular m-0 opacity-0 pos-abs disable-click t-1000'>
-                        Les membres de la communauté consultent les profils et produits des agriculteurs et en adoptent une partie. 
+                        Les membres de la communauté consultent les profils et produits des agriculteurs et les adoptent. 
                     </p>
                     <p class='text-regular m-0 opacity-0 pos-abs disable-click t-1000'>
                         Quand le temps de la récolte approche, les deux parties coordonnent les moyens de l'acheminement des produits.
@@ -43,7 +45,7 @@
             </div>
         </div>
         <div class='landing-wrapper step2 flex-row justify-between'>
-            <div class='box box-producer'>
+            <div class='box-producer'>
                 <div class='box first-b'>
                     <img style='height:210px;' src='../asset/images/farmers.png' />
                     <h2 class='text-green m-top-10'><span>V</span><span>o</span><span>u</span><span>s</span> <span>ê</span><span>t</span><span>e</span><span>s</span> <span>a</span><span>g</span><span>r</span><span>i</span><span>c</span><span>u</span><span>l</span><span>t</span><span>e</span><span>u</span><span>r</span> <span class='text-600'>?</span></h2>
@@ -60,9 +62,9 @@
                 </div>
                 <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
                 <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
-                <div @click='changeStep(1, "producer")' :class="{ disable: !evalInTransition() && step == 2 && (!name.trim() || !$root.isEmailValid(email)) }" class='button' style='margin-top:20px;'>Présentez-vous à la communauté</div>
+                <div @click='changeStep(1, "producer")' :class="{ disable: !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)) }" class='button' style='margin-top:20px;'>Présentez-vous à la communauté</div>
             </div>
-            <div class='box box-community'>
+            <div class='box-community'>
                 <div class='box first-b'>
                     <img style='height:210px;' src='../asset/images/family.png' />
                     <h2 class='text-brown m-top-10'><span>V</span><span>o</span><span>u</span><span>s</span> <span>a</span><span>i</span><span>m</span><span>e</span><span>z</span> <span>m</span><span>a</span><span>n</span><span>g</span><span>e</span><span>r</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span class='text-600'>?</span></h2>
@@ -77,10 +79,13 @@
                 </div>
                 <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
                 <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
-                <div @click='changeStep(1, "community")' :class="{ disable: !evalInTransition() && step == 2 && (!name.trim() || !$root.isEmailValid(email)) }" class='button bg-brown' style='margin-top:20px;'>Supportez vos agriculteurs locaux</div>
+                <div @click='changeStep(1, "community")' :class="{ disable: !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)) }" class='button bg-brown' style='margin-top:20px;'>Supportez vos agriculteurs locaux</div>
             </div>
         </div>
         <div class='bottom-wrapper'>
+        </div>
+        <div class='pos-abs'>
+            
         </div>
     </div>
 </template>
@@ -93,6 +98,7 @@ var topStep2 = 238;
 var inTransition = false;
 var completedAnim = false;
 var animStep = 0;
+var darkMode = false;
 
 export default {
     name: 'Landing',
@@ -189,10 +195,14 @@ export default {
                     break;
                 case 2: 
                     document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*6)+"vh";
+                    document.querySelector('.step1').style.pointerEvents = 'none';
+                    document.querySelector('.anim-steps-nav').style.pointerEvents = 'none';
+                    document.querySelector('.step1 p.pos-abs:not(.disable-click)').style.pointerEvents = 'none';
+                    document.querySelector('.step1 .button').style.pointerEvents = 'none';
                     inTransition = true;
                     top = 35;
                     document.querySelector('.loading-wrapper').style.top = top + 'px'
-                    setTimeout(() => {
+                    setTimeout(() => { 
                         document.querySelector('.step1').style.transition = 'all 0.5s';
                         document.querySelector('.step1').style.opacity = '0';
                         document.querySelector('.step1').style.pointerEvents = 'none';
@@ -375,11 +385,29 @@ export default {
                             if(!completedAnim && !stopAuto) {
                                 vue_obj.animSteps(newStep+1);
                             } 
-                        }, 5000);    
+                        }, 4000);    
                     }
                 }, 2000);
                                                   
             }
+        },
+        toggleDarkMode: function() {
+            if(!darkMode) {
+                document.querySelector('.bottom-wrapper').style.filter = 'brightness(0)'
+                document.querySelector('.armatic').style.color = '#FFFFFF';
+                // document.querySelector('.moon').classList.remove('opacity-0');
+                document.querySelectorAll('.box').forEach(node => {
+                    node.style.background = '#fafffe';
+                })
+            } else {
+                document.querySelector('.bottom-wrapper').style.filter = 'brightness(1)'
+                document.querySelector('.armatic').style.color = '#3a3d3c';
+                // document.querySelector('.moon').classList.add('opacity-0');
+                document.querySelectorAll('.box').forEach(node => {
+                    node.style.background = '#fafffee2';
+                })
+            }
+            darkMode = !darkMode
         },
         registerScroll: function() {
             // document.querySelector('.loading-wrapper').style.transition = 'all 0.5s';
@@ -527,13 +555,13 @@ export default {
         pointer-events:none;
         transition: all 1s;
     }
-    .box.box-producer, .box.box-community {
+    .box-producer, .box-community {
         width: calc(50% - 40px);
         padding:0;
         background:#FFFFFF00;
         box-shadow:unset;
     }
-    .box.box-producer .box, .box.box-community .box {
+    .box-producer .box, .box-community .box {
         padding: 30px;
         padding-bottom:50px;
         border-radius:4px;
@@ -580,12 +608,21 @@ export default {
         width: calc(100% - 100px);
         transform: translateX(-50%);
     }
+    .moon {
+        width: 6px;
+        margin: 5px;
+        /* padding: 99px; */
+        box-shadow: 0px 0px 30px 10px #315ba3;
+        border-radius: 300px;
+        -webkit-animation: spin 8s linear infinite;
+        animation: spin 8s linear infinite;
+    }
 
 @media only screen and (max-width: 1060px) {
     .landing-wrapper.step2 {
         display:block;
     }
-    .box.box-producer, .box.box-community {
+    .box-producer, .box-community {
         width:100%;
         margin:auto
     }
@@ -603,7 +640,7 @@ export default {
         padding: 20px;
         padding-top:0px;
     }
-    .box.box-producer, .box.box-community {
+    .box-producer, .box-community {
         width:calc(100% - 40px);
         margin:auto
     }
