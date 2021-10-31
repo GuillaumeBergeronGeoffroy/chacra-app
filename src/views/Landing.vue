@@ -5,12 +5,12 @@
                  <!-- <img class='moon opacity-0' src='../asset/images/moon.png' /> -->
              </div>
              <div class='image-container pos-abs clickable' @click='toggleDarkMode()'>
-                <img src='../asset/images/tree.png' />
-                <img src='../asset/images/tree1.png' />
-                <img src='../asset/images/tree2.png' />
-                <img src='../asset/images/tree3.png' />
-                <img src='../asset/images/tree4.png' />
-                <img src='../asset/images/tree5.png' />
+                <img src='../asset/images/loader/tree.png' />
+                <img src='../asset/images/loader/tree1.png' />
+                <img src='../asset/images/loader/tree2.png' />
+                <img src='../asset/images/loader/tree3.png' />
+                <img src='../asset/images/loader/tree4.png' />
+                <img src='../asset/images/loader/tree5.png' />
              </div>
             <h1 class='armatic text-center'><span>C</span><span>h</span><span>a</span><span>c</span><span>r</span><span>a</span> <span>C</span><span>r</span><span>o</span><span>w</span><span>d</span><span>F</span><span>a</span><span>r</span><span>m</span><span>i</span><span>n</span><span>g</span></h1>
             <div class='landing-wrapper step1'>
@@ -25,7 +25,7 @@
                         Ils définissent les unités, les prix et les disponibilités de leurs produits en fonction des prévisions de leur production saisonnière.
                     </p>
                     <p class='text-regular m-0 opacity-0 pos-abs disable-click t-1000'>
-                        Les membres de la communauté consultent les profils et produits des agriculteurs et les adoptent. 
+                        Les membres de la communauté consultent les profils et produits des agriculteurs et en adoptent la production. 
                     </p>
                     <p class='text-regular m-0 opacity-0 pos-abs disable-click t-1000'>
                         Quand le temps de la récolte approche, les deux parties coordonnent les moyens de l'acheminement des produits.
@@ -47,7 +47,7 @@
         <div class='landing-wrapper step2 flex-row justify-between'>
             <div class='box-producer'>
                 <div class='box first-b'>
-                    <img style='height:210px;' src='../asset/images/farmers.png' />
+                    <img style='height:210px;' src='../asset/images/landing/step2/farmers.png' />
                     <h2 class='text-green m-top-10'><span>V</span><span>o</span><span>u</span><span>s</span> <span>ê</span><span>t</span><span>e</span><span>s</span> <span>a</span><span>g</span><span>r</span><span>i</span><span>c</span><span>u</span><span>l</span><span>t</span><span>e</span><span>u</span><span>r</span> <span class='text-600'>?</span></h2>
                     <p class='text-regular step2-text'>
                        <!-- Notre plateforme vous offre un espace où vous pouvez raconter votre histoire, rejoindre une communauté de gens qui cherchent à choisir et à agir pour le mieux et assurer l'écoulement du fruit de votre labeur -->
@@ -66,7 +66,7 @@
             </div>
             <div class='box-community'>
                 <div class='box first-b'>
-                    <img style='height:210px;' src='../asset/images/family.png' />
+                    <img style='height:210px;' src='../asset/images/landing/step2/family.png' />
                     <h2 class='text-brown m-top-10'><span>V</span><span>o</span><span>u</span><span>s</span> <span>a</span><span>i</span><span>m</span><span>e</span><span>z</span> <span>m</span><span>a</span><span>n</span><span>g</span><span>e</span><span>r</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span class='text-600'>?</span></h2>
                     <p class='text-regular step2-text'>
                         En adoptant la production saisonière de vos agriculteurs locaux sur la plateforme, vous supportez directement leur projet tout en vous assurant de faire des choix de consommations qui répondent à vos critères.
@@ -84,14 +84,43 @@
         </div>
         <div class='bottom-wrapper'>
         </div>
-        <div class='pos-abs'>
-            
-        </div>
     </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import farm1 from '@/asset/images/landing/farms/farm1.jpg'
+import farm2 from '@/asset/images/landing/farms/farm2.jpg'
+import farm3 from '@/asset/images/landing/farms/farm3.jpg'
+import farm4 from '@/asset/images/landing/farms/farm4.jpg'
+import farm5 from '@/asset/images/landing/farms/farm5.jpg'
+import farm6 from '@/asset/images/landing/farms/farm6.jpg'
+import farm7 from '@/asset/images/landing/farms/farm7.jpg'
+import farm8 from '@/asset/images/landing/farms/farm8.jpg'
+import farm9 from '@/asset/images/landing/farms/farm9.jpg'
+import farm10 from '@/asset/images/landing/farms/farm10.jpg'
+import farm11 from '@/asset/images/landing/farms/farm11.jpg'
+import farm12 from '@/asset/images/landing/farms/farm12.jpg'
+import farm13 from '@/asset/images/landing/farms/farm13.jpg'
+import farm14 from '@/asset/images/landing/farms/farm14.jpg'
+import farm15 from '@/asset/images/landing/farms/farm15.jpg'
+import farm16 from '@/asset/images/landing/farms/farm16.jpg'
+import farm17 from '@/asset/images/landing/farms/farm17.jpg'
+import farm18 from '@/asset/images/landing/farms/farm18.jpg'
+import farm19 from '@/asset/images/landing/farms/farm19.jpg'
+import farm20 from '@/asset/images/landing/farms/farm20.jpg'
+import farm21 from '@/asset/images/landing/farms/farm21.jpg'
+import farm22 from '@/asset/images/landing/farms/farm22.jpg'
+import farm23 from '@/asset/images/landing/farms/farm23.jpg'
+import farm24 from '@/asset/images/landing/farms/farm24.jpg'
+import farm25 from '@/asset/images/landing/farms/farm25.jpg'
+import farm26 from '@/asset/images/landing/farms/farm26.jpg'
+import farm27 from '@/asset/images/landing/farms/farm27.jpg'
+import farm28 from '@/asset/images/landing/farms/farm28.jpg'
+import farm29 from '@/asset/images/landing/farms/farm29.jpg'
+import farm30 from '@/asset/images/landing/farms/farm30.jpg'
+import farm31 from '@/asset/images/landing/farms/farm31.jpg'
+import farm32 from '@/asset/images/landing/farms/farm32.jpg'
 
 var top = 35;
 var topStep2 = 238;
@@ -99,6 +128,7 @@ var inTransition = false;
 var completedAnim = false;
 var animStep = 0;
 var darkMode = false;
+var saveOpacity = 1;
 
 export default {
     name: 'Landing',
@@ -120,6 +150,112 @@ export default {
     methods: {
         init: async function() {
             var vue_obj = this;
+            var num = Math.ceil(Math.random() * 29);
+            var image = new Image();
+            image.onload = function () {
+                document.querySelector('.bottom-wrapper').style.background = 'url(' + image.src + ') no-repeat center';
+                document.querySelector('.bottom-wrapper').style.backgroundSize = 'cover'
+            }
+            switch (num) {
+                case 1:
+                    image.src = farm1;
+                    break;
+                case 2:
+                    image.src = farm2;
+                    break;
+                case 3:
+                    image.src = farm3;
+                    break;
+                case 4:
+                    image.src = farm4;
+                    break;
+                case 5:
+                    image.src = farm5;
+                    break;
+                case 6:
+                    image.src = farm6;
+                    break;
+                case 7:
+                    image.src = farm7;
+                    break;
+                case 8:
+                    image.src = farm8;
+                    break;
+                case 9:
+                    image.src = farm9;
+                    break;
+                case 10:
+                    image.src = farm10;
+                    break;
+                case 11:
+                    image.src = farm11;
+                    break;
+                case 12:
+                    image.src = farm12;
+                    break;
+                case 13:
+                    image.src = farm13;
+                    break;
+                case 14:
+                    image.src = farm14;
+                    break;
+                case 15:
+                    image.src = farm15;
+                    break;
+                case 16:
+                    image.src = farm16;
+                    break;
+                case 17:
+                    image.src = farm17;
+                    break;
+                case 18:
+                    image.src = farm18;
+                    break;
+                case 19:
+                    image.src = farm19;
+                    break;
+                case 20:
+                    image.src = farm20;
+                    break;
+                case 21:
+                    image.src = farm21;
+                    break;
+                case 22:
+                    image.src = farm22;
+                    break;
+                case 23:
+                    image.src = farm23;
+                    break;
+                case 24:
+                    image.src = farm24;
+                    break;
+                case 25:
+                    image.src = farm25;
+                    break;
+                case 26:
+                    image.src = farm26;
+                    break;
+                case 27:
+                    image.src = farm27;
+                    break;
+                case 28:
+                    image.src = farm28;
+                    break;
+                case 29:
+                    image.src = farm29;
+                    break;
+                case 30:
+                    image.src = farm30;
+                    break;
+                case 31:
+                    image.src = farm31;
+                    break;
+                case 32:
+                    image.src = farm32;
+                    break;
+                default:
+                    break;
+            }
             document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale)+"vh";
             const animChar = async function() {
                 var elem = document.querySelector(".loading-wrapper span:not(.opacity-1):not(.anim-steps-nav span)");
@@ -150,13 +286,14 @@ export default {
                 document.querySelector('.image-container img:nth-of-type(6)').style.opacity = '1';
             }, 400);
             setTimeout(() => {
+                document.querySelector('.bottom-wrapper').style.opacity = '1';
+            }, 1000)
+            setTimeout(() => {
                 document.querySelector('.loading-wrapper').style.top = '35px';
-                document.querySelector('.loading-wrapper').style.transform = 'translateX(-50%)';
             }, 1600);
             setTimeout(() => {
                 document.querySelector('.step1').style.opacity = '1';
                 document.querySelector('.step1').style.top = '213px';
-                document.querySelector('.bottom-wrapper').style.opacity = '1';
                 vue_obj.registerScroll();
             }, 2000);
             
@@ -165,11 +302,10 @@ export default {
             var vue_obj = this;
             switch (this.step + direction) {
                 case 0:
-                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale)+"vh";
-                    this.step += direction
                     break;
                 case 1:
                     document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*3)+"vh";
+                    document.querySelector('.bottom-wrapper').style.opacity = '0.75';
                     inTransition = true;
                     top = 35;
                     document.querySelector('.loading-wrapper').style.top = top + 'px'
@@ -194,7 +330,8 @@ export default {
                     this.step += direction
                     break;
                 case 2: 
-                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*6)+"vh";
+                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*5)+"vh";
+                    document.querySelector('.bottom-wrapper').style.opacity = '0.5';
                     document.querySelector('.step1').style.pointerEvents = 'none';
                     document.querySelector('.anim-steps-nav').style.pointerEvents = 'none';
                     document.querySelector('.step1 p.pos-abs:not(.disable-click)').style.pointerEvents = 'none';
@@ -393,6 +530,8 @@ export default {
         },
         toggleDarkMode: function() {
             if(!darkMode) {
+                saveOpacity = document.querySelector('.bottom-wrapper').style.opacity;
+                document.querySelector('.bottom-wrapper').style.opacity = 1
                 document.querySelector('.bottom-wrapper').style.filter = 'brightness(0)'
                 document.querySelector('.armatic').style.color = '#FFFFFF';
                 // document.querySelector('.moon').classList.remove('opacity-0');
@@ -400,6 +539,7 @@ export default {
                     node.style.background = '#fafffe';
                 })
             } else {
+                document.querySelector('.bottom-wrapper').style.opacity = saveOpacity;
                 document.querySelector('.bottom-wrapper').style.filter = 'brightness(1)'
                 document.querySelector('.armatic').style.color = '#3a3d3c';
                 // document.querySelector('.moon').classList.add('opacity-0');
@@ -472,8 +612,8 @@ export default {
     .loading-wrapper {
         position:absolute;
         left:50%;
-        top:50%;
-        transform: translate(-50%,-50%);
+        top:calc(50% - 62.5px);
+        transform: translateX(-50%);
         transition:all 1s;
         max-width: 750px;
         width: 100%;
@@ -533,8 +673,6 @@ export default {
         z-index:1;
         transition: all 1s;
         opacity:0;
-        background: url("../asset/images/farm.jpg") no-repeat center;
-        background-size: cover;
         width:100%;
     }
     /* .bottom-wrapper img {
