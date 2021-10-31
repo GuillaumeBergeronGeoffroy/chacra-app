@@ -18,19 +18,26 @@
                     <p class='text-regular m-0 step1-text'>
                         Chacra CrowdFarming ambitionne transformer la nature des chaînes d’approvisionnements alimentaires en facilitant la vente directe grâce à l'innovation numérique. Nous croyons en une agriculture et une consommation alimentaire plus responsable, caractérisé par une industrie biologique, locale et humaine. C’est pourquoi nous plaçons les agriculteurs au centre de notre mission sociale.
                     </p>
-                    <p class='text-regular m-0 opacity-0 pos-abs disable-click t-1000'>
+                    <img class='personLeft' src='../asset/images/landing/step1/personLeft.png' />
+                    <img class='form' src='../asset/images/landing/step1/form.png' />
+                    <img class='prevision' src='../asset/images/landing/step1/prevision.png' />
+                    <img class='love' src='../asset/images/landing/step1/love.png' />
+                    <img class='coordination' src='../asset/images/landing/step1/coordination.png' />
+                    <img class='produce' src='../asset/images/landing/step1/produce.png' />
+                    <img class='personRight' src='../asset/images/landing/step1/personRight.png' />
+                    <p class='text-regular m-0 opacity-0 pos-abs disable-click t-500'>
                         Les agriculteurs s'inscrivent et nous les accompagnons dans la personnalisation de leur profil pour que l'image qu'ils présentent soit la plus authentique que possible. 
                     </p>
-                    <p class='text-regular m-0 opacity-0 pos-abs disable-click t-1000'>
+                    <p class='text-regular m-0 opacity-0 pos-abs disable-click t-500'>
                         Ils définissent les unités, les prix et les disponibilités de leurs produits en fonction des prévisions de leur production saisonnière.
                     </p>
-                    <p class='text-regular m-0 opacity-0 pos-abs disable-click t-1000'>
+                    <p class='text-regular m-0 opacity-0 pos-abs disable-click t-500'>
                         Les membres de la communauté consultent les profils et produits des agriculteurs et en adoptent la production. 
                     </p>
-                    <p class='text-regular m-0 opacity-0 pos-abs disable-click t-1000'>
+                    <p class='text-regular m-0 opacity-0 pos-abs disable-click t-500'>
                         Quand le temps de la récolte approche, les deux parties coordonnent les moyens de l'acheminement des produits.
                     </p>
-                    <p class='text-regular m-0 opacity-0 pos-abs disable-click t-1000'>
+                    <p class='text-regular m-0 opacity-0 pos-abs disable-click t-500'>
                         Les produits sont acheminés de l'agriculteur au membre de la communauté.
                     </p>
                     <div class='flex-row opacity-0 t-500 anim-steps-nav justify-center'>
@@ -152,7 +159,7 @@ export default {
     methods: {
         init: async function() {
             var vue_obj = this;
-            farmNum = Math.ceil(Math.random() * 1);
+            farmNum = Math.ceil(Math.random() * 32 );
             var image = new Image();
             image.onload = function () {
                 document.querySelector('.bottom-wrapper').style.background = 'url(' + image.src + ') no-repeat center';
@@ -288,13 +295,13 @@ export default {
                 document.querySelector('.image-container img:nth-of-type(6)').style.opacity = '1';
             }, 400);
             setTimeout(() => {
-                // document.querySelector('.bottom-wrapper').style.opacity = '1';
+                document.querySelector('.bottom-wrapper').style.opacity = '1';
             }, 1000)
             setTimeout(() => {
                 document.querySelector('.loading-wrapper').style.top = '35px';
             }, 1600);
             setTimeout(() => {
-                                document.querySelector('.bottom-wrapper').style.opacity = '1';
+                // document.querySelector('.bottom-wrapper').style.opacity = '1';
                 document.querySelector('.step1').style.opacity = '1';
                 document.querySelector('.step1').style.top = '213px';
                 vue_obj.registerScroll();
@@ -307,8 +314,8 @@ export default {
                 case 0:
                     break;
                 case 1:
-                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*3)+"vh";
-                    // document.querySelector('.bottom-wrapper').style.opacity = '0.75';
+                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*2)+"vh";
+                    document.querySelector('.bottom-wrapper').style.opacity = '0.75';
                     inTransition = true;
                     top = 35;
                     document.querySelector('.loading-wrapper').style.top = top + 'px'
@@ -333,8 +340,8 @@ export default {
                     this.step += direction
                     break;
                 case 2: 
-                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*6)+"vh";
-                    // document.querySelector('.bottom-wrapper').style.opacity = '0.5';
+                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*10)+"vh";
+                    document.querySelector('.bottom-wrapper').style.opacity = '0.3';
                     document.querySelector('.step1').style.pointerEvents = 'none';
                     document.querySelector('.anim-steps-nav').style.pointerEvents = 'none';
                     document.querySelector('.step1 p.pos-abs:not(.disable-click)').style.pointerEvents = 'none';
@@ -491,23 +498,148 @@ export default {
         animSteps: function(newStep, stopAuto = false) {
             if(newStep != animStep && !inTransition) {
                 var vue_obj = this;
+                var personLeft = document.querySelector('.personLeft');
+                var personRight = document.querySelector('.personRight');
+                var form = document.querySelector('.form');
+                var prevision = document.querySelector('.prevision');
+                var love = document.querySelector('.love');
+                var coordination = document.querySelector('.coordination');
+                var produce = document.querySelector('.produce');
                 inTransition = true;
                 document.querySelector('.anim-steps-nav').style.pointerEvents = 'none';
                 if(animStep > 0) {
                     document.querySelector('.step1 p.pos-abs:nth-of-type('+(animStep+1)+')').classList.add('disable-click');
                     document.querySelector('.step1 p.pos-abs:nth-of-type('+(animStep+1)+')').classList.add('opacity-0');
-                    document.querySelector('.step1 p.pos-abs:nth-of-type('+(animStep+1)+')').style.bottom = '55px';
+                    document.querySelector('.step1 p.pos-abs:nth-of-type('+(animStep+1)+')').style.bottom = '65px';
+                }
+                var moveOut = function() {
+                    if(animStep == 1) {
+                        form.style.opacity = 0;
+                        form.style.bottom = '380px';
+                        form.style.right = '255px';
+                    } else if(animStep == 2) {
+                        prevision.style.opacity = 0;
+                        prevision.style.bottom = '380px';
+                        prevision.style.right = '230px';
+                    } else if(animStep == 3) {
+                        love.style.opacity = 0;
+                        love.style.bottom = '280px';
+                        if(newStep != 4) {
+                            personRight.style.opacity = 0;
+                            personRight.style.right = '-40px';
+                            personRight.style.transform = 'unset';
+                        }
+                    }
+                    else if(animStep == 4) {
+                        personLeft.style.transform = 'unset';
+                        personLeft.style.left = '-40px';
+                        if(newStep != 1 || newStep != 2) {
+                            personLeft.style.opacity = 0;
+                        }
+                        personRight.style.transform = 'unset';
+                        personRight.style.right = '-40px';
+                        if(newStep != 3) {
+                            personRight.style.opacity = 0;
+                        }
+                        coordination.style.bottom = '380px';
+                        coordination.style.opacity = 0;
+                    } else if(animStep == 5) {
+                        produce.style.bottom = '160px';
+                        produce.style.opacity = 0;
+                    }
+                    if(newStep == 3 || newStep == 5) {
+                        personLeft.style.transform = 'unset';
+                        personLeft.style.left = '-40px';
+                        personLeft.style.opacity = 0;
+                    }
+                }
+                var resetFunc = function() {
+                    setTimeout(() => {
+                        if(newStep != 1) {
+                            form.style.bottom = '310px';
+                            form.style.right = '150px';
+                        }
+                        if(newStep != 2) {
+                            prevision.style.bottom = '310px';
+                            prevision.style.right = '150px';
+                        }
+                        if(newStep != 3) {
+                            love.style.bottom = '200px';
+                        }
+                        if(newStep != 4) {
+                            console.log('tmp')
+                        }
+                        if(newStep != 5) {
+                            console.log('tmp')
+                        }
+                    }, 1000);
                 }
                 setTimeout(() => {
+                    moveOut();
+                    resetFunc();
+                    switch (newStep) {
+                        case 1:
+                            personLeft.style.opacity = 1;
+                            personLeft.style.left = '50%';
+                            personLeft.style.transform = 'translateX(-50%)';
+                            personLeft.style.bottom = '200px';
+                            setTimeout(() => {
+                                form.style.opacity = 1;
+                                form.style.bottom = '300px';
+                                form.style.right = '255px';
+                            }, 250);
+                            break;
+                        case 2:
+                            personLeft.style.left = '50%';
+                            personLeft.style.transform = 'translateX(-50%)';
+                            personLeft.style.opacity = 1;
+                            personLeft.style.bottom = '180px';
+                            setTimeout(() => {
+                               prevision.style.opacity = 1;
+                               prevision.style.bottom = '310px';
+                               prevision.style.right = '230px';
+                            }, 250);
+                            break;
+                        case 3:
+                            personRight.style.opacity = 1;
+                            personRight.style.right = '50%';
+                            personRight.style.transform = 'translateX(50%)';
+                            personRight.style.bottom = '180px';
+                            setTimeout(() => {
+                                love.style.opacity = 1;
+                                love.style.bottom = '250px';
+                            }, 350);
+                            break;
+                        case 4:
+                            personLeft.style.transform = 'unset';
+                            personLeft.style.left = '55px';
+                            personLeft.style.opacity = 1;
+                            personLeft.style.bottom = '180px';
+                            personRight.style.right = '55px';
+                            personRight.style.transform = 'unset';
+                            personRight.style.opacity = 1;
+                            personRight.style.bottom = '180px';
+                            // setTimeout(() => {
+                                coordination.style.bottom = '295px';
+                                coordination.style.opacity = 1;
+                            // }, 250)
+                            break;
+                        case 5:
+                            produce.style.bottom = '180px';
+                            produce.style.opacity = 1;
+                            break;
+                        default:
+                            break;
+                    }
                     document.querySelector('.step1 p.pos-abs:nth-of-type('+(newStep+1)+')').classList.remove('disable-click');
                     document.querySelector('.step1 p.pos-abs:nth-of-type('+(newStep+1)+')').classList.remove('opacity-0');
-                    document.querySelector('.step1 p.pos-abs:nth-of-type('+(newStep+1)+')').style.bottom = '85px';
+                    document.querySelector('.step1 p.pos-abs:nth-of-type('+(newStep+1)+')').style.bottom = '87px';
                     document.querySelector('.anim-steps-nav span.active').classList.remove('active');
                     document.querySelector('.anim-steps-nav span:nth-of-type('+newStep+')').classList.add('active');
                 }, 250);   
                 setTimeout(() => {
                     if(animStep > 0) {
-                        document.querySelector('.step1 p.pos-abs:nth-of-type('+(animStep+1)+')').style.bottom = '135px';
+                        document.querySelector('.step1 p.pos-abs:nth-of-type('+(animStep+1)+')').style.bottom = '115px';
                     } else {
                         document.querySelector('.step1 .button').textContent = "Joignez-vous à nous";                   
                     }
@@ -729,7 +861,7 @@ export default {
         height:15px;
         background:#FFFFFF;
         border:2px solid #46b056;
-        margin:1px;
+        margin:2px;
         border-radius:100px;
         opacity:0.5;
         cursor: pointer;
@@ -744,7 +876,7 @@ export default {
         opacity:0.75;
     }
     .step1 p.pos-abs {
-        bottom: 135px;
+        bottom: 115px;
         left: 50%;
         width: calc(100% - 100px);
         transform: translateX(-50%);
@@ -757,6 +889,54 @@ export default {
         border-radius: 300px;
         -webkit-animation: spin 8s linear infinite;
         animation: spin 8s linear infinite;
+    }
+    .personLeft, .personRight {
+        position:absolute;
+        width:330px;
+        bottom:200px;
+        transition:all 0.5s;
+        opacity:0;
+        pointer-events: none;
+    }
+    .personLeft {
+        left:-40px;
+    }
+    .personRight {
+        right:-40px;
+    }
+    .form, .prevision, .love, .coordination, .produce {
+        position:absolute;
+        transition:all 0.5s;
+        opacity:0;
+        pointer-events: none;
+    }
+    .love {
+        width:50px;
+        bottom:200px;
+        right:calc(50% + 75px);
+    }
+    .form {
+        width: 90px;
+        right: 150px;
+        bottom:300px;
+    }
+    .prevision {
+        width:110px;
+        right:150px;
+        bottom:310px;
+    }
+    .coordination {
+        bottom:380px;
+        width:150px;
+        left:50%;
+        transform: translateX(-50%);
+    }
+    .produce {
+        left:50%;
+        transform: translateX(-50%);
+        bottom:160px;
+        width:220px;
+        transition:all 0.5s;
     }
 
 @media only screen and (max-width: 1060px) {
