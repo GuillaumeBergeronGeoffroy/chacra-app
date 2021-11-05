@@ -69,7 +69,7 @@
                 </div>
                 <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
                 <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
-                <div @click='changeStep(1, "producer")' :class="{ disable: !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)) }" class='button' style='margin-top:20px;'>Présentez-vous à la communauté</div>
+                <div @click='step == 3 ? subscribe("Producer") : changeStep(1, "producer")' :class="{ disable: !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)) }" class='button' style='margin-top:20px;'>Présentez-vous à la communauté</div>
             </div>
             <div class='box-community'>
                 <div class='box first-b'>
@@ -86,7 +86,7 @@
                 </div>
                 <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
                 <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
-                <div @click='changeStep(1, "community")' :class="{ disable: !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)) }" class='button bg-brown' style='margin-top:20px;'>Supportez vos agriculteurs locaux</div>
+                <div @click='step == 3 ? subscribe("User") : changeStep(1, "community")' :class="{ disable: !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)) }" class='button bg-brown' style='margin-top:20px;'>Supportez vos agriculteurs locaux</div>
             </div>
         </div>
         <div class='bottom-wrapper'>
@@ -112,23 +112,6 @@ import farm12 from '@/asset/images/landing/farms/farm12.jpg'
 import farm13 from '@/asset/images/landing/farms/farm13.jpg'
 import farm14 from '@/asset/images/landing/farms/farm14.jpg'
 import farm15 from '@/asset/images/landing/farms/farm15.jpg'
-import farm16 from '@/asset/images/landing/farms/farm16.jpg'
-import farm17 from '@/asset/images/landing/farms/farm17.jpg'
-import farm18 from '@/asset/images/landing/farms/farm18.jpg'
-import farm19 from '@/asset/images/landing/farms/farm19.jpg'
-import farm20 from '@/asset/images/landing/farms/farm20.jpg'
-import farm21 from '@/asset/images/landing/farms/farm21.jpg'
-import farm22 from '@/asset/images/landing/farms/farm22.jpg'
-import farm23 from '@/asset/images/landing/farms/farm23.jpg'
-import farm24 from '@/asset/images/landing/farms/farm24.jpg'
-import farm25 from '@/asset/images/landing/farms/farm25.jpg'
-import farm26 from '@/asset/images/landing/farms/farm26.jpg'
-import farm27 from '@/asset/images/landing/farms/farm27.jpg'
-import farm28 from '@/asset/images/landing/farms/farm28.jpg'
-import farm29 from '@/asset/images/landing/farms/farm29.jpg'
-import farm30 from '@/asset/images/landing/farms/farm30.jpg'
-import farm31 from '@/asset/images/landing/farms/farm31.jpg'
-import farm32 from '@/asset/images/landing/farms/farm32.jpg'
 
 var top = 35;
 var topStep2 = 238;
@@ -159,7 +142,7 @@ export default {
     methods: {
         init: async function() {
             var vue_obj = this;
-            farmNum = Math.ceil(Math.random() * 32 );
+            farmNum = Math.ceil(Math.random() * 15);
             var image = new Image();
             image.onload = function () {
                 document.querySelector('.bottom-wrapper').style.background = 'url(' + image.src + ') no-repeat center';
@@ -211,57 +194,6 @@ export default {
                 case 15:
                     image.src = farm15;
                     break;
-                case 16:
-                    image.src = farm16;
-                    break;
-                case 17:
-                    image.src = farm17;
-                    break;
-                case 18:
-                    image.src = farm18;
-                    break;
-                case 19:
-                    image.src = farm19;
-                    break;
-                case 20:
-                    image.src = farm20;
-                    break;
-                case 21:
-                    image.src = farm21;
-                    break;
-                case 22:
-                    image.src = farm22;
-                    break;
-                case 23:
-                    image.src = farm23;
-                    break;
-                case 24:
-                    image.src = farm24;
-                    break;
-                case 25:
-                    image.src = farm25;
-                    break;
-                case 26:
-                    image.src = farm26;
-                    break;
-                case 27:
-                    image.src = farm27;
-                    break;
-                case 28:
-                    image.src = farm28;
-                    break;
-                case 29:
-                    image.src = farm29;
-                    break;
-                case 30:
-                    image.src = farm30;
-                    break;
-                case 31:
-                    image.src = farm31;
-                    break;
-                case 32:
-                    image.src = farm32;
-                    break;
                 default:
                     break;
             }
@@ -277,32 +209,32 @@ export default {
             }
             animChar()
             setTimeout(() => {
-                document.querySelector('.image-container img:nth-of-type(1)').style.opacity = '1';
+                document.querySelector('.image-container img:nth-of-type(1)').style.opacity = 1;
             }, 25)
             setTimeout(() => {
-                document.querySelector('.image-container img:nth-of-type(2)').style.opacity = '1';
+                document.querySelector('.image-container img:nth-of-type(2)').style.opacity = 1;
             }, 50);
             setTimeout(() => {
-                document.querySelector('.image-container img:nth-of-type(3)').style.opacity = '1';
+                document.querySelector('.image-container img:nth-of-type(3)').style.opacity = 1;
             }, 100);
             setTimeout(() => {
-                document.querySelector('.image-container img:nth-of-type(4)').style.opacity = '1';
+                document.querySelector('.image-container img:nth-of-type(4)').style.opacity = 1;
             }, 200);
              setTimeout(() => {
-                document.querySelector('.image-container img:nth-of-type(5)').style.opacity = '1';
+                document.querySelector('.image-container img:nth-of-type(5)').style.opacity = 1;
             }, 300);
              setTimeout(() => {
-                document.querySelector('.image-container img:nth-of-type(6)').style.opacity = '1';
+                document.querySelector('.image-container img:nth-of-type(6)').style.opacity = 1;
             }, 400);
             setTimeout(() => {
-                document.querySelector('.bottom-wrapper').style.opacity = '1';
+                document.querySelector('.bottom-wrapper').style.opacity = 1;
             }, 1000)
             setTimeout(() => {
                 document.querySelector('.loading-wrapper').style.top = '35px';
             }, 1600);
             setTimeout(() => {
-                // document.querySelector('.bottom-wrapper').style.opacity = '1';
-                document.querySelector('.step1').style.opacity = '1';
+                // document.querySelector('.bottom-wrapper').style.opacity = 1;
+                document.querySelector('.step1').style.opacity = 1;
                 document.querySelector('.step1').style.top = '213px';
                 vue_obj.registerScroll();
             }, 2000);
@@ -314,16 +246,20 @@ export default {
                 case 0:
                     break;
                 case 1:
-                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*2)+"vh";
-                    document.querySelector('.bottom-wrapper').style.opacity = '0.75';
+                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*5)+"vh";
+                    if(!darkMode) {
+                        document.querySelector('.bottom-wrapper').style.opacity = 0.75;
+                    } else {
+                        saveOpacity = 0.75
+                    }
                     inTransition = true;
                     top = 35;
                     document.querySelector('.loading-wrapper').style.top = top + 'px'
                     document.querySelector('.step1-text').style.transition = 'all 0.5s';
-                    document.querySelector('.step1 .button').style.opacity = '0';
+                    document.querySelector('.step1 .button').style.opacity = 0;
                     document.querySelector('.step1 .button').style.pointerEvents = 'none';
                     document.querySelector('.step1-text').style.height = document.querySelector('.step1-text').offsetHeight + 'px';
-                    document.querySelector('.step1-text').style.opacity = '0';
+                    document.querySelector('.step1-text').style.opacity = 0;
                     document.querySelector('.step1-text').style.pointerEvents = 'none';
                     setTimeout(() => {
                         document.querySelector('.anim-steps-nav').classList.remove('hide');
@@ -340,8 +276,12 @@ export default {
                     this.step += direction
                     break;
                 case 2: 
-                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*10)+"vh";
-                    document.querySelector('.bottom-wrapper').style.opacity = '0.3';
+                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*20)+"vh";
+                    if(!darkMode) {
+                        document.querySelector('.bottom-wrapper').style.opacity = 0.3;
+                    } else {
+                        saveOpacity = 0.3
+                    }
                     document.querySelector('.step1').style.pointerEvents = 'none';
                     document.querySelector('.anim-steps-nav').style.pointerEvents = 'none';
                     document.querySelector('.step1 p.pos-abs:not(.disable-click)').style.pointerEvents = 'none';
@@ -351,14 +291,14 @@ export default {
                     document.querySelector('.loading-wrapper').style.top = top + 'px'
                     setTimeout(() => { 
                         document.querySelector('.step1').style.transition = 'all 0.5s';
-                        document.querySelector('.step1').style.opacity = '0';
+                        document.querySelector('.step1').style.opacity = 0;
                         document.querySelector('.step1').style.pointerEvents = 'none';
                         document.querySelector('.step1').style.top = '413px';
                     }, 200);
                     setTimeout(() => {
                         document.querySelector('.step2').style.top = topStep2 + 'px';
                         document.querySelector('.step2').style.pointerEvents = 'auto';
-                        document.querySelector('.step2').style.opacity = '1';
+                        document.querySelector('.step2').style.opacity = 1;
                     }, 300);
                     setTimeout(() => {
                         inTransition = false;
@@ -390,8 +330,8 @@ export default {
                             // document.querySelector('.box-'+context + ' .step2-text').style.marginTop = '0px';
                             // document.querySelector('.box-'+context + ' .step2-text').style.height = document.querySelector('.box-'+context + ' .step2-text').offsetHeight + 'px';
                             document.querySelector('.box-'+context + ' img').style.transition = 'all 0.5s';
-                            document.querySelector('.box-'+context + ' img').style.opacity = '0';
-                            document.querySelector('.box-'+context + ' .step2-text').style.opacity = '0';
+                            document.querySelector('.box-'+context + ' img').style.opacity = 0;
+                            document.querySelector('.box-'+context + ' .step2-text').style.opacity = 0;
                             document.querySelector('.box-'+context + ' .step2-text').style.pointerEvents = 'none';
                             document.querySelector('.box-'+context +' .button').style.opacity = 0;
                             // document.querySelector('.box-'+context + ' .step2-text').style.marginTop = '-' + document.querySelector('.box-'+context + ' .step2-text').offsetHeight + 'px';
@@ -399,7 +339,7 @@ export default {
                         }, 600);
                         setTimeout(() => {
                             // document.querySelector('.box-'+context + ' .step2-text').textContent = "Restez à l'affut des derniers avancements dans le projet en remplissant le formulaire de contact ci-dessous et réserver votre place pour avoir accès au marché en avant-première."
-                            // document.querySelector('.box-'+context + ' .step2-text').style.opacity = '1';
+                            // document.querySelector('.box-'+context + ' .step2-text').style.opacity = 1;
                             document.querySelector('.box-'+context + ' h2').style.transition = 'all 0.2s';
                             const animChar = async function() {
                                 var elem = document.querySelectorAll('.box-'+context + ' h2 span:not(.opacity-0)');
@@ -465,7 +405,7 @@ export default {
                         document.querySelector('.box-'+context + ' .step2-text').style.transition = 'all 0.5s';
                         document.querySelector('.box-'+context + ' h2').style.transition = 'all 0.5s';
                         setTimeout(() => {
-                            document.querySelector('.box-'+other).style.opacity = '0';
+                            document.querySelector('.box-'+other).style.opacity = 0;
                         }, 100);
                         insideAnimation()
                     } else {
@@ -477,14 +417,14 @@ export default {
                     // document.querySelector('.loading-wrapper').style.top = top + 'px'
                     // setTimeout(() => {
                     //     document.querySelector('.step1').style.transition = 'all 0.5s';
-                    //     document.querySelector('.step1').style.opacity = '0';
+                    //     document.querySelector('.step1').style.opacity = 0;
                     //     document.querySelector('.step1').style.pointerEvents = 'none';
                     //     document.querySelector('.step1').style.top = '413px';
                     // }, 200);
                     // setTimeout(() => {
                     //     document.querySelector('.step2').style.top = topStep2 + 'px';
                     //     document.querySelector('.step2').style.pointerEvents = 'auto';
-                    //     document.querySelector('.step2').style.opacity = '1';
+                    //     document.querySelector('.step2').style.opacity = 1;
                     // }, 300);
                     // setTimeout(() => {
                     //     inTransition = false;
@@ -516,7 +456,7 @@ export default {
                     if(animStep == 1) {
                         form.style.opacity = 0;
                         form.style.bottom = '380px';
-                        form.style.right = '255px';
+                        form.style.right = '250px';
                     } else if(animStep == 2) {
                         prevision.style.opacity = 0;
                         prevision.style.bottom = '380px';
@@ -544,7 +484,7 @@ export default {
                         coordination.style.bottom = '380px';
                         coordination.style.opacity = 0;
                     } else if(animStep == 5) {
-                        produce.style.bottom = '160px';
+                        produce.style.bottom = '150px';
                         produce.style.opacity = 0;
                     }
                     if(newStep == 3 || newStep == 5) {
@@ -586,7 +526,7 @@ export default {
                             setTimeout(() => {
                                 form.style.opacity = 1;
                                 form.style.bottom = '300px';
-                                form.style.right = '255px';
+                                form.style.right = '250px';
                             }, 250);
                             break;
                         case 2:
@@ -625,7 +565,7 @@ export default {
                             // }, 250)
                             break;
                         case 5:
-                            produce.style.bottom = '180px';
+                            produce.style.bottom = '170px';
                             produce.style.opacity = 1;
                             break;
                         default:
@@ -650,7 +590,7 @@ export default {
                     document.querySelector('.anim-steps-nav').style.pointerEvents = 'auto';
                     if(newStep == 5 || stopAuto == true) {
                         completedAnim = true;
-                        document.querySelector('.step1 .button').style.opacity = '1';     
+                        document.querySelector('.step1 .button').style.opacity = 1;     
                         document.querySelector('.step1 .button').style.pointerEvents = 'auto';                   
                     } else {
                         setTimeout(() => {
@@ -717,7 +657,7 @@ export default {
                 top += change;
                 
                 document.querySelector('.loading-wrapper').style.top = top + 'px';
-                if(this.step == 1 || this.step == 2) {
+                if(this.step == 1 || this.step == 2 || this.step == 3) {
                     topStep2 += change;
                     document.querySelector('.step2').style.top = topStep2 + 'px';
                 }
@@ -733,6 +673,17 @@ export default {
         },
         evalInTransition: () => {
             return inTransition;
+        },
+        subscribe: async function(type, data = {}, response = {}) {
+            var vue_obj = this;
+            data[type + 'Email'] = vue_obj.email;
+            data[type + 'Name'] = vue_obj.name;
+            response = await this.$root.request(
+                'SESSION_MANAGER',
+                '/subscribe',
+                data
+            );
+            console.log(response)
         }
     },
 }
@@ -934,8 +885,8 @@ export default {
     .produce {
         left:50%;
         transform: translateX(-50%);
-        bottom:160px;
-        width:220px;
+        bottom:150px;
+        width:245px;
         transition:all 0.5s;
     }
 
