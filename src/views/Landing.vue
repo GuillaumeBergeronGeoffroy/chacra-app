@@ -1,10 +1,10 @@
 <template>
     <div id='cw' :style='{zoom: $root.scale, "height": (100/$root.scale)+"vh"}'>
         <div class='loading-wrapper'>
-             <div class='loading-circle t-500 clickable' @click='toggleDarkMode()'>
+             <div class='loading-circle t-500 disable-click' @click='toggleDarkMode()'>
                  <!-- <img class='moon opacity-0' src='../asset/images/moon.png' /> -->
              </div>
-             <div class='image-container pos-abs clickable' @click='toggleDarkMode()'>
+             <div class='image-container pos-abs disable-click' @click='toggleDarkMode()'>
                 <img src='../asset/images/loader/tree.png' />
                 <img src='../asset/images/loader/tree1.png' />
                 <img src='../asset/images/loader/tree2.png' />
@@ -12,9 +12,9 @@
                 <img src='../asset/images/loader/tree4.png' />
                 <img src='../asset/images/loader/tree5.png' />
              </div>
-            <h1 class='armatic text-center'><span>C</span><span>h</span><span>a</span><span>c</span><span>r</span><span>a</span> <span>C</span><span>r</span><span>o</span><span>w</span><span>d</span><span>F</span><span>a</span><span>r</span><span>m</span><span>i</span><span>n</span><span>g</span></h1>
+            <h1 class='text-center armatic'><span>C</span><span>h</span><span>a</span><span>c</span><span>r</span><span>a</span> <span>C</span><span>r</span><span>o</span><span>w</span><span>d</span><span>F</span><span>a</span><span>r</span><span>m</span><span>i</span><span>n</span><span>g</span></h1>
             <div class='landing-wrapper step1'>
-                <div class='box p-bot-40'>
+                <div class='box p-bot-30'>
                     <p class='text-regular m-0 step1-text'>
                         Chacra CrowdFarming ambitionne transformer la nature des chaînes d’approvisionnements alimentaires en facilitant la vente directe grâce à l'innovation numérique. Nous croyons en une agriculture et une consommation alimentaire plus responsable, caractérisé par une industrie biologique, locale et humaine. C’est pourquoi nous plaçons les agriculteurs au centre de notre mission sociale.
                     </p>
@@ -48,14 +48,14 @@
                         <span  @click="animSteps(5, true)"></span>
                     </div>
                 </div>
-                <div @click='changeStep()' class='button' style='width:350px;margin-top:50px;'>Comment ça marche ?</div>
+                <div @click='changeStep()' class='button m-top-20' style='width:350px;'>Comment ça marche ?</div>
             </div>
         </div>
         <div class='landing-wrapper step2 flex-row justify-between'>
             <div class='box-producer'>
                 <div class='box first-b'>
-                    <img style='height:210px;' src='../asset/images/landing/step2/farmers.png' />
-                    <h2 class='text-green m-top-10'><span>V</span><span>o</span><span>u</span><span>s</span> <span>ê</span><span>t</span><span>e</span><span>s</span> <span>a</span><span>g</span><span>r</span><span>i</span><span>c</span><span>u</span><span>l</span><span>t</span><span>e</span><span>u</span><span>r</span> <span class='text-600'>?</span></h2>
+                    <!-- <img style='height:210px;' src='../asset/images/landing/step2/farmers.png' /> -->
+                    <h2 class='m-top-10'><span>V</span><span>o</span><span>u</span><span>s</span> <span>ê</span><span>t</span><span>e</span><span>s</span> <span>a</span><span>g</span><span>r</span><span>i</span><span>c</span><span>u</span><span>l</span><span>t</span><span>e</span><span>u</span><span>r</span> <span class='text-600'>?</span></h2>
                     <p class='text-regular step2-text'>
                        <!-- Notre plateforme vous offre un espace où vous pouvez raconter votre histoire, rejoindre une communauté de gens qui cherchent à choisir et à agir pour le mieux et assurer l'écoulement du fruit de votre labeur -->
                         <!-- Notre plateforme vous offre un espace ou vous pouvez raconter votre histoire à une communauté de gens qui cherchent à choisir et à agir pour le mieux pour que vous puissiez sécuriser la pérennité de votre labeur -->
@@ -67,14 +67,14 @@
                         Assurons votre place sur la plateforme au lancement, entrez vos informations et nous vous contacterons sous peu
                     </p>
                 </div>
-                <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
-                <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
-                <div @click='step == 3 ? subscribe("Producer") : changeStep(1, "producer")' :class="{ disable: !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)) }" class='button' style='margin-top:20px;'>Présentez-vous à la communauté</div>
+                <div class='box p-30 opacity-0 hide name-b box-border'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
+                <div class='box p-30 opacity-0 hide email-b box-border'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
+                <div @click='step == 3 ? subscribe("Producer") : changeStep(1, "producer")' :class="{ 'disable-click': !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)) }" class='button' style='margin-top:20px;'>Présentez-vous à la communauté</div>
             </div>
             <div class='box-community'>
                 <div class='box first-b'>
-                    <img style='height:210px;' src='../asset/images/landing/step2/family.png' />
-                    <h2 class='text-brown m-top-10'><span>V</span><span>o</span><span>u</span><span>s</span> <span>a</span><span>i</span><span>m</span><span>e</span><span>z</span> <span>m</span><span>a</span><span>n</span><span>g</span><span>e</span><span>r</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span class='text-600'>?</span></h2>
+                    <!-- <img style='height:210px;' src='../asset/images/landing/step2/family.png' /> -->
+                    <h2 class='m-top-10'><span>V</span><span>o</span><span>u</span><span>s</span> <span>a</span><span>i</span><span>m</span><span>e</span><span>z</span> <span>m</span><span>a</span><span>n</span><span>g</span><span>e</span><span>r</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span class='text-600'>?</span></h2>
                     <p class='text-regular step2-text'>
                         En adoptant la production saisonière de vos agriculteurs locaux sur la plateforme, vous supportez directement leur projet tout en vous assurant de faire des choix de consommations qui répondent à vos critères.
                     </p>
@@ -84,9 +84,9 @@
                        Réservez votre place pour avoir accès à la plateforme en avant-première
                     </p>
                 </div>
-                <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
-                <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
-                <div @click='step == 3 ? subscribe("User") : changeStep(1, "community")' :class="{ disable: !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)) }" class='button bg-brown' style='margin-top:20px;'>Supportez vos agriculteurs locaux</div>
+                <div class='box p-30 opacity-0 hide name-b box-border'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
+                <div class='box p-30 opacity-0 hide email-b box-border'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
+                <div @click='step == 3 ? subscribe("User") : changeStep(1, "community")' :class="{ 'disable-click': !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)) }" class='button' style='margin-top:20px;'>Supportez vos agriculteurs locaux</div>
             </div>
         </div>
         <div class='bottom-wrapper'>
@@ -98,23 +98,23 @@
 // @ is an alias to /src
 
 import farm1 from '@/asset/images/landing/farms/farm1.jpg'
-import farm2 from '@/asset/images/landing/farms/farm2.jpg'
-import farm3 from '@/asset/images/landing/farms/farm3.jpg'
-import farm4 from '@/asset/images/landing/farms/farm4.jpg'
-import farm5 from '@/asset/images/landing/farms/farm5.jpg'
-import farm6 from '@/asset/images/landing/farms/farm6.jpg'
-import farm7 from '@/asset/images/landing/farms/farm7.jpg'
-import farm8 from '@/asset/images/landing/farms/farm8.jpg'
-import farm9 from '@/asset/images/landing/farms/farm9.jpg'
-import farm10 from '@/asset/images/landing/farms/farm10.jpg'
-import farm11 from '@/asset/images/landing/farms/farm11.jpg'
-import farm12 from '@/asset/images/landing/farms/farm12.jpg'
-import farm13 from '@/asset/images/landing/farms/farm13.jpg'
-import farm14 from '@/asset/images/landing/farms/farm14.jpg'
-import farm15 from '@/asset/images/landing/farms/farm15.jpg'
+// import farm2 from '@/asset/images/landing/farms/farm2.jpg'
+// import farm3 from '@/asset/images/landing/farms/farm3.jpg'
+// import farm4 from '@/asset/images/landing/farms/farm4.jpg'
+// import farm5 from '@/asset/images/landing/farms/farm5.jpg'
+// import farm6 from '@/asset/images/landing/farms/farm6.jpg'
+// import farm7 from '@/asset/images/landing/farms/farm7.jpg'
+// import farm8 from '@/asset/images/landing/farms/farm8.jpg'
+// import farm9 from '@/asset/images/landing/farms/farm9.jpg'
+// import farm10 from '@/asset/images/landing/farms/farm10.jpg'
+// import farm11 from '@/asset/images/landing/farms/farm11.jpg'
+// import farm12 from '@/asset/images/landing/farms/farm12.jpg'
+// import farm13 from '@/asset/images/landing/farms/farm13.jpg'
+// import farm14 from '@/asset/images/landing/farms/farm14.jpg'
+// import farm15 from '@/asset/images/landing/farms/farm15.jpg'
 
 var top = 35;
-var topStep2 = 238;
+var topStep2 = 278;
 var inTransition = false;
 var completedAnim = false;
 var animStep = 0;
@@ -142,7 +142,7 @@ export default {
     methods: {
         init: async function() {
             var vue_obj = this;
-            farmNum = Math.ceil(Math.random() * 15);
+            farmNum = Math.ceil(Math.random() * 1);
             var image = new Image();
             image.onload = function () {
                 document.querySelector('.bottom-wrapper').style.background = 'url(' + image.src + ') no-repeat center';
@@ -152,48 +152,48 @@ export default {
                 case 1:
                     image.src = farm1;
                     break;
-                case 2:
-                    image.src = farm2;
-                    break;
-                case 3:
-                    image.src = farm3;
-                    break;
-                case 4:
-                    image.src = farm4;
-                    break;
-                case 5:
-                    image.src = farm5;
-                    break;
-                case 6:
-                    image.src = farm6;
-                    break;
-                case 7:
-                    image.src = farm7;
-                    break;
-                case 8:
-                    image.src = farm8;
-                    break;
-                case 9:
-                    image.src = farm9;
-                    break;
-                case 10:
-                    image.src = farm10;
-                    break;
-                case 11:
-                    image.src = farm11;
-                    break;
-                case 12:
-                    image.src = farm12;
-                    break;
-                case 13:
-                    image.src = farm13;
-                    break;
-                case 14:
-                    image.src = farm14;
-                    break;
-                case 15:
-                    image.src = farm15;
-                    break;
+                // case 2:
+                //     image.src = farm2;
+                //     break;
+                // case 3:
+                //     image.src = farm3;
+                //     break;
+                // case 4:
+                //     image.src = farm4;
+                //     break;
+                // case 5:
+                //     image.src = farm5;
+                //     break;
+                // case 6:
+                //     image.src = farm6;
+                //     break;
+                // case 7:
+                //     image.src = farm7;
+                //     break;
+                // case 8:
+                //     image.src = farm8;
+                //     break;
+                // case 9:
+                //     image.src = farm9;
+                //     break;
+                // case 10:
+                //     image.src = farm10;
+                //     break;
+                // case 11:
+                //     image.src = farm11;
+                //     break;
+                // case 12:
+                //     image.src = farm12;
+                //     break;
+                // case 13:
+                //     image.src = farm13;
+                //     break;
+                // case 14:
+                //     image.src = farm14;
+                //     break;
+                // case 15:
+                //     image.src = farm15;
+                    // break;
                 default:
                     break;
             }
@@ -228,16 +228,16 @@ export default {
             }, 400);
             setTimeout(() => {
                 document.querySelector('.bottom-wrapper').style.opacity = 1;
-            }, 1000)
+            }, 1600)
             setTimeout(() => {
                 document.querySelector('.loading-wrapper').style.top = '35px';
-            }, 1600);
+            }, 2000);
             setTimeout(() => {
                 // document.querySelector('.bottom-wrapper').style.opacity = 1;
                 document.querySelector('.step1').style.opacity = 1;
                 document.querySelector('.step1').style.top = '213px';
                 vue_obj.registerScroll();
-            }, 2000);
+            }, 2200);
             
         },
         changeStep: function(direction = 1, context = null) {
@@ -246,9 +246,10 @@ export default {
                 case 0:
                     break;
                 case 1:
-                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*5)+"vh";
+                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*3)+"vh";
                     if(!darkMode) {
-                        document.querySelector('.bottom-wrapper').style.opacity = 0.75;
+                        document.querySelector('#cw').style.background = '#fbfff9';
+                        document.querySelector('.bottom-wrapper').style.opacity = 0.95;
                     } else {
                         saveOpacity = 0.75
                     }
@@ -266,7 +267,7 @@ export default {
                         // document.querySelector('.anim-steps-nav').classList.remove('opacity-0');
                         setTimeout(() => {
                             // document.querySelector('.anim-steps-nav').classList.remove('hide');
-                            document.querySelector('.step1-text').style.height = (document.querySelector('.step1-text').offsetHeight + 150) + 'px';
+                            document.querySelector('.step1-text').style.height = (document.querySelector('.step1-text').offsetHeight + 200) + 'px';
                             document.querySelector('.anim-steps-nav').classList.remove('opacity-0');
                             vue_obj.animSteps(1);
                             // document.querySelector('.anim-steps-nav').style.marginTop = '30px';
@@ -276,14 +277,16 @@ export default {
                     this.step += direction
                     break;
                 case 2: 
-                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*20)+"vh";
+                    document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*8)+"vh";
                     if(!darkMode) {
-                        document.querySelector('.bottom-wrapper').style.opacity = 0.3;
+                        // document.querySelector('#cw').style.background = '#dab6fc';
+                        document.querySelector('.bottom-wrapper').style.opacity = 0.65;
                     } else {
                         saveOpacity = 0.3
                     }
                     document.querySelector('.step1').style.pointerEvents = 'none';
                     document.querySelector('.anim-steps-nav').style.pointerEvents = 'none';
+                    completedAnim = true;
                     document.querySelector('.step1 p.pos-abs:not(.disable-click)').style.pointerEvents = 'none';
                     document.querySelector('.step1 .button').style.pointerEvents = 'none';
                     inTransition = true;
@@ -313,7 +316,7 @@ export default {
                     // const insideTransition = func()() 
                     inTransition = true;
                     top = 35;
-                    topStep2 = 238;
+                    topStep2 = 278;
                     document.querySelector('.loading-wrapper').style.top = top + 'px'
                     document.querySelector('.step2').style.top = topStep2 + 'px';
                     var sign = '+';
@@ -329,8 +332,8 @@ export default {
                             document.querySelector('.box-'+context + ' h2').style.marginTop = '10px';
                             // document.querySelector('.box-'+context + ' .step2-text').style.marginTop = '0px';
                             // document.querySelector('.box-'+context + ' .step2-text').style.height = document.querySelector('.box-'+context + ' .step2-text').offsetHeight + 'px';
-                            document.querySelector('.box-'+context + ' img').style.transition = 'all 0.5s';
-                            document.querySelector('.box-'+context + ' img').style.opacity = 0;
+                            // document.querySelector('.box-'+context + ' img').style.transition = 'all 0.5s';
+                            // document.querySelector('.box-'+context + ' img').style.opacity = 0;
                             document.querySelector('.box-'+context + ' .step2-text').style.opacity = 0;
                             document.querySelector('.box-'+context + ' .step2-text').style.pointerEvents = 'none';
                             document.querySelector('.box-'+context +' .button').style.opacity = 0;
@@ -359,12 +362,12 @@ export default {
                                             })
                                         } else {
                                             document.querySelector('.box-'+context + ' .step2-text').style.transition = 'all 1s';
-                                            document.querySelector('.box-'+context + ' img').style.transition = 'all 1s';
+                                            // document.querySelector('.box-'+context + ' img').style.transition = 'all 1s';
                                             document.querySelector('.box-'+context + ' h2').style.transition = 'all 1s';
-                                            document.querySelector('.box-'+context + ' .first-b').style.paddingBottom = '30px';
+                                            document.querySelector('.box-'+context + ' .first-b').style.paddingBottom = '0px';
 
                                             document.querySelector('.box-'+context + ' h2').style.marginTop = '-15px';
-                                            document.querySelector('.box-'+context + ' img').style.height = '0px'
+                                            // document.querySelector('.box-'+context + ' img').style.height = '0px'
                                             document.querySelector('.box-'+context + ' .step2-text').style.marginTop = '-' + document.querySelector('.box-'+context + ' .step2-text').offsetHeight + 'px';
                                             document.querySelector('.box-'+context + ' .step2-text').style.marginBottom = '0px';
                                             
@@ -381,11 +384,9 @@ export default {
                                             document.querySelector('.box-'+context +' .button').textContent = contextCta
                                             document.querySelector('.box-'+context +' .button').style.opacity = 1;
 
-                                            // setTimeout(() => {
-                                            //     document.querySelector('.box-'+context + ' .first-b').style.transition = 'all 0.5s';
-                                            //     document.querySelector('.box-'+context + ' .first-b').style.background = '#fafffe00';
-                                            //     document.querySelector('.box-'+context + ' .first-b').style.boxShadow = 'none';
-                                            // }, 650); 
+                                            setTimeout(() => {
+                                                document.querySelector('.box-'+context + ' .first-b').style.border = 'none';
+                                            }, 650); 
 
                                             inTransition = false;
                                             vue_obj.$forceUpdate();                                            
@@ -484,7 +485,7 @@ export default {
                         coordination.style.bottom = '380px';
                         coordination.style.opacity = 0;
                     } else if(animStep == 5) {
-                        produce.style.bottom = '150px';
+                        produce.style.bottom = '100px';
                         produce.style.opacity = 0;
                     }
                     if(newStep == 3 || newStep == 5) {
@@ -565,7 +566,7 @@ export default {
                             // }, 250)
                             break;
                         case 5:
-                            produce.style.bottom = '170px';
+                            produce.style.bottom = '115px';
                             produce.style.opacity = 1;
                             break;
                         default:
@@ -581,7 +582,9 @@ export default {
                     if(animStep > 0) {
                         document.querySelector('.step1 p.pos-abs:nth-of-type('+(animStep+1)+')').style.bottom = '115px';
                     } else {
-                        document.querySelector('.step1 .button').textContent = "Joignez-vous à nous";                   
+                        document.querySelector('.step1 .button').textContent = "Joignez-vous à nous";   
+                        document.querySelector('.step1 .button').style.opacity = 1;     
+                        document.querySelector('.step1 .button').style.pointerEvents = 'auto';                                 
                     }
                     animStep = newStep;
                 }, 1000);   
@@ -590,8 +593,6 @@ export default {
                     document.querySelector('.anim-steps-nav').style.pointerEvents = 'auto';
                     if(newStep == 5 || stopAuto == true) {
                         completedAnim = true;
-                        document.querySelector('.step1 .button').style.opacity = 1;     
-                        document.querySelector('.step1 .button').style.pointerEvents = 'auto';                   
                     } else {
                         setTimeout(() => {
                             if(!completedAnim && !stopAuto) {
@@ -691,9 +692,10 @@ export default {
 
 <style scoped>
     #cw {
-        background:#fbfff9;
+        background:#fb5607;
         max-height:100vh;
         overflow: hidden;
+        transition:all 1s;
     }
     .loading-wrapper {
         position:absolute;
@@ -701,7 +703,7 @@ export default {
         top:calc(50% - 62.5px);
         transform: translateX(-50%);
         transition:all 1s;
-        max-width: 750px;
+        max-width: 800px;
         width: 100%;
         /* max-height: 100vh;
         overflow:hidden; */
@@ -710,14 +712,15 @@ export default {
     .loading-circle {
         background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='100' ry='100' stroke='black' stroke-width='2' stroke-dasharray='9%2c 6%2c 7' stroke-dashoffset='0' stroke-linecap='round'/%3e%3c/svg%3e");
         border-radius: 100px;
-        animation: spin 12s linear infinite;
+        /* animation: spin 12s linear infinite; */
         width:125px;
         height:125px;
         margin:auto;
+        opacity:0;
     }
     #cw h1 {
         padding-top:15px;
-        color:#3a3d3c;
+        color:#FFF;
     }
     .loading-wrapper h1 span {  
         opacity:  0;
@@ -747,7 +750,7 @@ export default {
     .landing-wrapper .box {
         margin:0;
         margin-top:1em;
-        max-width:750px;
+        max-width:800px;
         /* margin-bottom:1em; */
     }
     .landing-wrapper.step1 {
@@ -805,22 +808,22 @@ export default {
         background-size: cover;
     } */
     .anim-steps-nav {
-        /* margin-top:100px; */
+        /* margin-top:15px; */
     }
     .anim-steps-nav span {
         width:15px;
         height:15px;
         background:#FFFFFF;
-        border:2px solid #46b056;
-        margin:2px;
+        border:2px solid #FFFFFF;
+        margin:5px;
         border-radius:100px;
         opacity:0.5;
         cursor: pointer;
         transition:all 0.2s;
     }
     .anim-steps-nav span.active {
-        border-color:#46b056;
-        background:#46b056;
+        border-color:#FFFFFF;
+        background:#FFFFFF;
         opacity:1;
     }
     .anim-steps-nav span:hover:not(.active) {
@@ -885,8 +888,8 @@ export default {
     .produce {
         left:50%;
         transform: translateX(-50%);
-        bottom:150px;
-        width:245px;
+        bottom:100px;
+        width:355px;
         transition:all 0.5s;
     }
 
@@ -909,8 +912,8 @@ export default {
         box-shadow: unset;
         border-radius: unset;
         background:unset;
-        padding: 20px;
-        padding-top:0px;
+        /* padding: 20px; */
+        /* padding-top:0px; */
     }
     .box-producer, .box-community {
         width:calc(100% - 40px);
