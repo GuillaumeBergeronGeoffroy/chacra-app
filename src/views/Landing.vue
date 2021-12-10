@@ -48,7 +48,7 @@
                         <span  @click="animSteps(5, true)"></span>
                     </div>
                 </div>
-                <div @click='changeStep()' class='button m-top-20' style='width:350px;'>Comment ça marche ?</div>
+                <div @click='changeStep()' class='button m-top-20' style='max-width:350px;'>Comment ça marche ?</div>
             </div>
         </div>
         <div class='landing-wrapper step2 flex-row justify-between'>
@@ -67,9 +67,9 @@
                         Assurons votre place sur la plateforme au lancement, entrez vos informations et nous vous contacterons sous peu
                     </p>
                 </div>
-                <div class='box p-30 opacity-0 hide name-b box-border'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
-                <div class='box p-30 opacity-0 hide email-b box-border'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
-                <div @click='step == 3 ? subscribe("Producer") : changeStep(1, "producer")' :class="{ 'disable-click': !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)) }" class='button' style='margin-top:20px;'>Présentez-vous à la communauté</div>
+                <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
+                <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
+                <div @click='step == 3 ? subscribe("Producer") : changeStep(1, "producer")' :class="{ 'disable-click': !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)), 'button-enabled' : step == 3 && name.trim() && $root.isEmailValid(email) }" class='button max-w-300' style='margin-top:40px;'>Présentez-vous</div>
             </div>
             <div class='box-community'>
                 <div class='box first-b'>
@@ -84,9 +84,9 @@
                        Réservez votre place pour avoir accès à la plateforme en avant-première
                     </p>
                 </div>
-                <div class='box p-30 opacity-0 hide name-b box-border'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
-                <div class='box p-30 opacity-0 hide email-b box-border'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
-                <div @click='step == 3 ? subscribe("User") : changeStep(1, "community")' :class="{ 'disable-click': !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)) }" class='button' style='margin-top:20px;'>Supportez vos agriculteurs locaux</div>
+                <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
+                <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
+                <div @click='step == 3 ? subscribe("User") : changeStep(1, "community")' :class="{ 'disable-click': !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)), 'button-enabled' : step == 3 && name.trim() && $root.isEmailValid(email) }" class='button max-w-300' style='margin-top:40px;'>Supportez vos agriculteurs</div>
             </div>
         </div>
         <div class='bottom-wrapper'>
@@ -147,6 +147,7 @@ export default {
             image.onload = function () {
                 document.querySelector('.bottom-wrapper').style.background = 'url(' + image.src + ') no-repeat center';
                 document.querySelector('.bottom-wrapper').style.backgroundSize = 'cover'
+                document.querySelector('.bottom-wrapper').style.backgroundPositionY = 'top'
             }
             switch (farmNum) {
                 case 1:
@@ -197,7 +198,7 @@ export default {
                 default:
                     break;
             }
-            document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale)+"vh";
+            document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*1.3)+"vh";
             const animChar = async function() {
                 var elem = document.querySelector(".loading-wrapper span:not(.opacity-1):not(.anim-steps-nav span)");
                 if(elem) {
@@ -248,8 +249,9 @@ export default {
                 case 1:
                     document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*3)+"vh";
                     if(!darkMode) {
-                        document.querySelector('#cw').style.background = '#fbfff9';
-                        document.querySelector('.bottom-wrapper').style.opacity = 0.95;
+                        console.log(document.querySelector('.bottom-wrapper').style.opacity)
+                        document.querySelector('#cw').style.background = '#99d6ea';
+                        document.querySelector('.bottom-wrapper').style.opacity = 0.75;
                     } else {
                         saveOpacity = 0.75
                     }
@@ -267,7 +269,7 @@ export default {
                         // document.querySelector('.anim-steps-nav').classList.remove('opacity-0');
                         setTimeout(() => {
                             // document.querySelector('.anim-steps-nav').classList.remove('hide');
-                            document.querySelector('.step1-text').style.height = (document.querySelector('.step1-text').offsetHeight + 200) + 'px';
+                            document.querySelector('.step1-text').style.height = 350 + 'px';
                             document.querySelector('.anim-steps-nav').classList.remove('opacity-0');
                             vue_obj.animSteps(1);
                             // document.querySelector('.anim-steps-nav').style.marginTop = '30px';
@@ -279,10 +281,10 @@ export default {
                 case 2: 
                     document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*8)+"vh";
                     if(!darkMode) {
-                        // document.querySelector('#cw').style.background = '#dab6fc';
-                        document.querySelector('.bottom-wrapper').style.opacity = 0.65;
+                        document.querySelector('#cw').style.background = '#b8e0d2';
+                        document.querySelector('.bottom-wrapper').style.opacity = 0.5;
                     } else {
-                        saveOpacity = 0.3
+                        saveOpacity = 0.5
                     }
                     document.querySelector('.step1').style.pointerEvents = 'none';
                     document.querySelector('.anim-steps-nav').style.pointerEvents = 'none';
@@ -314,6 +316,12 @@ export default {
                     // will only have the inside transition if mobile
                     
                     // const insideTransition = func()() 
+                     if(!darkMode) {
+                        document.querySelector('#cw').style.background = 'rgb(255 255 255)';
+                        document.querySelector('.bottom-wrapper').style.opacity = 0.3;
+                    } else {
+                        saveOpacity = 0.3
+                    }
                     inTransition = true;
                     top = 35;
                     topStep2 = 278;
@@ -584,7 +592,7 @@ export default {
                     } else {
                         document.querySelector('.step1 .button').textContent = "Joignez-vous à nous";   
                         document.querySelector('.step1 .button').style.opacity = 1;     
-                        document.querySelector('.step1 .button').style.pointerEvents = 'auto';                                 
+                        document.querySelector('.step1 .button').style.pointerEvents = 'none';                                 
                     }
                     animStep = newStep;
                 }, 1000);   
@@ -593,6 +601,9 @@ export default {
                     document.querySelector('.anim-steps-nav').style.pointerEvents = 'auto';
                     if(newStep == 5 || stopAuto == true) {
                         completedAnim = true;
+                        document.querySelector('.step1 .button').style.color = '#FFF';   
+                        document.querySelector('.step1 .button').style.background = '#000';   
+                        document.querySelector('.step1 .button').style.pointerEvents = 'auto';                                 
                     } else {
                         setTimeout(() => {
                             if(!completedAnim && !stopAuto) {
@@ -692,7 +703,7 @@ export default {
 
 <style scoped>
     #cw {
-        background:#fb5607;
+        background:#219ebc;
         max-height:100vh;
         overflow: hidden;
         transition:all 1s;
@@ -790,7 +801,7 @@ export default {
     }
     .box-producer .box, .box-community .box {
         padding: 30px;
-        padding-bottom:50px;
+        padding-bottom:20px;
         border-radius:4px;
     }
     /* .bubble {
@@ -892,6 +903,19 @@ export default {
         width:355px;
         transition:all 0.5s;
     }
+    .name-b {
+        padding-bottom: 5px !important;
+        padding-top:5px !important;
+    }
+    .name-b input {
+        max-width:220px;
+    } 
+    .email-b input {
+        max-width:325px;
+    }
+    /* .bottom-wrapper {
+        opacity:0!important;
+    } */
 
 @media only screen and (max-width: 1060px) {
     .landing-wrapper.step2 {
@@ -912,7 +936,8 @@ export default {
         box-shadow: unset;
         border-radius: unset;
         background:unset;
-        /* padding: 20px; */
+        padding-left: 5px;
+        padding-right: 5px;
         /* padding-top:0px; */
     }
     .box-producer, .box-community {
@@ -923,9 +948,16 @@ export default {
         max-width:calc(100% - 40px);
         margin:auto;
     }
-    .bottom-wrapper {
-        opacity:0!important;
+    .button {
+        background: #000000;
+        color: #FFFFFF;
     }
+    h1.armatic {
+        font-size: 48px;
+    }
+    /* .bottom-wrapper {
+        opacity:0!important;
+    } */
 }
 
     

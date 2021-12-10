@@ -45,6 +45,8 @@ button, div .button {
 .max-w-1500 { max-width: 1500px; }
 .max-w-1100 { max-width: 1100px; }
 .max-w-850 { max-width: 850px; }
+.max-w-300 { max-width: 300px; }
+.max-w-250 { max-width: 250px; }
 
 /* Fonts */
 .armatic { font-family: 'Amatic SC', cursive; }
@@ -90,6 +92,7 @@ input {
     border:none;
     width:100%;
     background:#ffffff00;
+    border-bottom:1px solid #000000;
 }
 input::placeholder {
     color:#000;
@@ -179,7 +182,7 @@ input:focus::placeholder {
 .text-white { color: #FFFFFF; }
 .text-green { color: #46b056; }
 
-button:hover, div .button:hover {
+button:hover, div .button:hover, .button-enabled {
     background: #000000;
     color: #FFFFFF;
     /* border: 1px solid #FFFFFF; */
