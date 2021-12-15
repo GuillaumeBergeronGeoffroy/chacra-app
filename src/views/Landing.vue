@@ -13,10 +13,13 @@
                 <img src='../asset/images/loader/tree5.png' />
              </div>
             <h1 class='text-center armatic'><span>C</span><span>h</span><span>a</span><span>c</span><span>r</span><span>a</span> <span>C</span><span>r</span><span>o</span><span>w</span><span>d</span><span>F</span><span>a</span><span>r</span><span>m</span><span>i</span><span>n</span><span>g</span></h1>
+            <div class='flex-row text-center align-center justify-center m-top-30 text-regular clickable lang-select'>
+                <span class='text-underline' style='margin-right:10px;' @click="setLang('fr')">Français</span> <span class='text-underline' style='margin-left:10px;' @click="setLang('en')">English</span>
+            </div>
             <div class='landing-wrapper step1'>
                 <div class='box p-bot-30'>
                     <p class='text-regular m-0 step1-text'>
-                        Chacra CrowdFarming ambitionne transformer la nature des chaînes d’approvisionnements alimentaires en facilitant la vente directe grâce à l'innovation numérique. Nous croyons en une agriculture et une consommation alimentaire plus responsable, caractérisé par une industrie biologique, locale et humaine. C’est pourquoi nous plaçons les agriculteurs au centre de notre mission sociale.
+                        {{ translations[lang].step1_text }}
                     </p>
                     <img class='personLeft' src='../asset/images/landing/step1/personLeft.png' />
                     <img class='form' src='../asset/images/landing/step1/form.png' />
@@ -26,19 +29,19 @@
                     <img class='produce' src='../asset/images/landing/step1/produce.png' />
                     <img class='personRight' src='../asset/images/landing/step1/personRight.png' />
                     <p class='text-regular m-0 opacity-0 pos-abs disable-click t-500'>
-                        Les agriculteurs s'inscrivent et nous les accompagnons dans la personnalisation de leur profil pour que l'image qu'ils présentent soit la plus authentique que possible. 
+                        {{ translations[lang].step1_anim_1 }} 
                     </p>
                     <p class='text-regular m-0 opacity-0 pos-abs disable-click t-500'>
-                        Ils définissent les unités, les prix et les disponibilités de leurs produits en fonction des prévisions de leur production saisonnière.
+                        {{ translations[lang].step1_anim_2 }}
                     </p>
                     <p class='text-regular m-0 opacity-0 pos-abs disable-click t-500'>
-                        Les membres de la communauté consultent les profils et produits des agriculteurs et en adoptent la production. 
+                        {{ translations[lang].step1_anim_3 }}
                     </p>
                     <p class='text-regular m-0 opacity-0 pos-abs disable-click t-500'>
-                        Quand le temps de la récolte approche, les deux parties coordonnent les moyens de l'acheminement des produits.
+                        {{ translations[lang].step1_anim_4 }}
                     </p>
                     <p class='text-regular m-0 opacity-0 pos-abs disable-click t-500'>
-                        Les produits sont acheminés de l'agriculteur au membre de la communauté.
+                        {{ translations[lang].step1_anim_5 }}
                     </p>
                     <div class='flex-row opacity-0 t-500 anim-steps-nav justify-center'>
                         <span class='active' @click="animSteps(1, true)"></span>
@@ -48,45 +51,45 @@
                         <span  @click="animSteps(5, true)"></span>
                     </div>
                 </div>
-                <div @click='changeStep()' class='button m-top-20' style='max-width:350px;'>Comment ça marche ?</div>
+                <div @click='changeStep()' class='button m-top-20' style='max-width:350px;'>{{ translations[lang].step1_cta }}</div>
             </div>
         </div>
         <div class='landing-wrapper step2 flex-row justify-between'>
             <div class='box-producer'>
                 <div class='box first-b'>
                     <!-- <img style='height:210px;' src='../asset/images/landing/step2/farmers.png' /> -->
-                    <h2 class='m-top-10'><span>V</span><span>o</span><span>u</span><span>s</span> <span>ê</span><span>t</span><span>e</span><span>s</span> <span>a</span><span>g</span><span>r</span><span>i</span><span>c</span><span>u</span><span>l</span><span>t</span><span>e</span><span>u</span><span>r</span> <span class='text-600'>?</span></h2>
+                    <h2 class='m-top-10' v-html='translations[lang].step2_title_producer'></h2>
                     <p class='text-regular step2-text'>
                        <!-- Notre plateforme vous offre un espace où vous pouvez raconter votre histoire, rejoindre une communauté de gens qui cherchent à choisir et à agir pour le mieux et assurer l'écoulement du fruit de votre labeur -->
                         <!-- Notre plateforme vous offre un espace ou vous pouvez raconter votre histoire à une communauté de gens qui cherchent à choisir et à agir pour le mieux pour que vous puissiez sécuriser la pérennité de votre labeur -->
-                        Notre plateforme vous offre un espace ou vous pouvez raconter votre histoire à une communauté de gens qui cherchent à choisir et à agir pour le mieux. Nous voulons vous aider à sécuriser la pérennité de votre labeur.
+                        {{ translations[lang].step2_text_producer }}
                     </p>
                 </div>
                 <div class='box p-30 opacity-0 hide desc-b'>
                     <p class='text-regular m-0'>
-                        Assurons votre place sur la plateforme au lancement, entrez vos informations et nous vous contacterons sous peu
+                        {{ translations[lang].step3_text_producer }}
                     </p>
                 </div>
                 <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
                 <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
-                <div @click='step == 3 ? subscribe("Producer") : changeStep(1, "producer")' :class="{ 'disable-click': !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)), 'button-enabled' : step == 3 && name.trim() && $root.isEmailValid(email) }" class='button max-w-300' style='margin-top:40px;'>Présentez-vous</div>
+                <div @click='step == 3 ? subscribe("Producer") : changeStep(1, "producer")' :class="{ 'disable-click': !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)), 'button-enabled' : step == 3 && name.trim() && $root.isEmailValid(email) }" class='button max-w-360' style='margin-top:40px;'>{{ translations[lang].step2_cta_producer }}</div>
             </div>
             <div class='box-community'>
                 <div class='box first-b'>
                     <!-- <img style='height:210px;' src='../asset/images/landing/step2/family.png' /> -->
-                    <h2 class='m-top-10'><span>V</span><span>o</span><span>u</span><span>s</span> <span>a</span><span>i</span><span>m</span><span>e</span><span>z</span> <span>m</span><span>a</span><span>n</span><span>g</span><span>e</span><span>r</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span class='text-600'>?</span></h2>
+                    <h2 class='m-top-10' v-html='translations[lang].step2_title_client'></h2>
                     <p class='text-regular step2-text'>
-                        En adoptant la production saisonière de vos agriculteurs locaux sur la plateforme, vous supportez directement leur projet tout en vous assurant de faire des choix de consommations qui répondent à vos critères.
+                        {{ translations[lang].step2_text_client }}
                     </p>
                 </div>
                 <div class='box p-30 opacity-0 hide desc-b'>
                     <p class='text-regular m-0'>
-                       Réservez votre place pour avoir accès à la plateforme en avant-première
+                        {{ translations[lang].step3_text_client }}
                     </p>
                 </div>
                 <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
                 <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
-                <div @click='step == 3 ? subscribe("User") : changeStep(1, "community")' :class="{ 'disable-click': !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)), 'button-enabled' : step == 3 && name.trim() && $root.isEmailValid(email) }" class='button max-w-300' style='margin-top:40px;'>Supportez vos agriculteurs</div>
+                <div @click='step == 3 ? subscribe("User") : changeStep(1, "community")' :class="{ 'disable-click': !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)), 'button-enabled' : step == 3 && name.trim() && $root.isEmailValid(email) }" class='button max-w-360' style='margin-top:40px;'>{{ translations[lang].step2_cta_client }}</div>
             </div>
         </div>
         <div class='bottom-wrapper'>
@@ -98,20 +101,6 @@
 // @ is an alias to /src
 
 import farm1 from '@/asset/images/landing/farms/farm1.jpg'
-// import farm2 from '@/asset/images/landing/farms/farm2.jpg'
-// import farm3 from '@/asset/images/landing/farms/farm3.jpg'
-// import farm4 from '@/asset/images/landing/farms/farm4.jpg'
-// import farm5 from '@/asset/images/landing/farms/farm5.jpg'
-// import farm6 from '@/asset/images/landing/farms/farm6.jpg'
-// import farm7 from '@/asset/images/landing/farms/farm7.jpg'
-// import farm8 from '@/asset/images/landing/farms/farm8.jpg'
-// import farm9 from '@/asset/images/landing/farms/farm9.jpg'
-// import farm10 from '@/asset/images/landing/farms/farm10.jpg'
-// import farm11 from '@/asset/images/landing/farms/farm11.jpg'
-// import farm12 from '@/asset/images/landing/farms/farm12.jpg'
-// import farm13 from '@/asset/images/landing/farms/farm13.jpg'
-// import farm14 from '@/asset/images/landing/farms/farm14.jpg'
-// import farm15 from '@/asset/images/landing/farms/farm15.jpg'
 
 var top = 35;
 var topStep2 = 278;
@@ -129,6 +118,31 @@ export default {
             step: 0,
             name: "",
             email: "",
+            lang: 'fr',
+            translations: {
+                'fr' : {
+                    step1_text: "Chacra ambitionne transformer la nature des chaînes d'approvisionnement alimentaire avec sa plateforme numérique d'économie collaborative qui met en relation directe les producteurs et les consommateurs. Notre approche inclusive revalorise les métiers agricoles et soutien le développement d'une agriculture humaine, locale et biologique pour assurer l'autonomie alimentaire de demain.",
+                    step1_anim_1: "Les producteurs s'inscrivent et nous les accompagnons dans la personnalisation de leur profil pour que l'image qu'ils présentent soit la plus authentique que possible.",
+                    step1_anim_2: "Ils définissent les unités, les prix et les disponibilités de leurs produits en fonction des prévisions de leur production saisonnière.",
+                    step1_anim_3: "Les membres de la communauté consultent les profils et produits des producteurs et en adoptent la production.",
+                    step1_anim_4: "Les producteurs travaillent de concert avec la nature pour assurer la maturation des produits dans le temps.",
+                    step1_anim_5: "Les produits sont acheminés du producteur au membre de la communauté.",
+                    step1_cta: "Comment ça marche ?",
+                    step2_title_producer: "<span>V</span><span>o</span><span>u</span><span>s</span> <span>ê</span><span>t</span><span>e</span><span>s</span> <span>p</span><span>r</span><span>o</span><span>d</span><span>u</span><span>c</span><span>t</span><span>e</span><span>u</span><span>r</span> <span class='text-600'>?</span>",
+                    step2_title_client: "<span>V</span><span>o</span><span>u</span><span>s</span> <span>a</span><span>i</span><span>m</span><span>e</span><span>z</span> <span>m</span><span>a</span><span>n</span><span>g</span><span>e</span><span>r</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span class='text-600'>?</span>",
+                    step2_text_producer: "Notre plateforme vous offre un espace ou vous pouvez raconter votre histoire à une communauté de gens qui cherchent à choisir et à agir pour le mieux. Nous voulons vous aider à sécuriser la pérennité de votre labeur.",
+                    step2_text_client: "En adoptant la production saisonière de vos producteurs locaux sur la plateforme, vous supportez directement leur projet tout en vous assurant de faire des choix de consommations qui répondent à vos critères.",
+                    step2_cta_producer: "Présentez-vous à la communauté",
+                    step2_cta_client: "Supportez vos producteurs locaux",
+                    step3_text_producer: "Assurons votre place sur la plateforme au lancement, entrez vos informations et nous vous contacterons sous peu",
+                    step3_text_client: "Réservez votre place pour avoir accès à la plateforme en avant-première",
+                    step3_cta_producer: "Entamez le dialogue",
+                    step3_cta_client: "Réservez votre place",
+                },
+                'en': {
+
+                }
+            }
         }
     },
     components: {
@@ -141,7 +155,7 @@ export default {
     },
     methods: {
         init: async function() {
-            var vue_obj = this;
+            // var vue_obj = this;
             farmNum = Math.ceil(Math.random() * 1);
             var image = new Image();
             image.onload = function () {
@@ -153,48 +167,6 @@ export default {
                 case 1:
                     image.src = farm1;
                     break;
-                // case 2:
-                //     image.src = farm2;
-                //     break;
-                // case 3:
-                //     image.src = farm3;
-                //     break;
-                // case 4:
-                //     image.src = farm4;
-                //     break;
-                // case 5:
-                //     image.src = farm5;
-                //     break;
-                // case 6:
-                //     image.src = farm6;
-                //     break;
-                // case 7:
-                //     image.src = farm7;
-                //     break;
-                // case 8:
-                //     image.src = farm8;
-                //     break;
-                // case 9:
-                //     image.src = farm9;
-                //     break;
-                // case 10:
-                //     image.src = farm10;
-                //     break;
-                // case 11:
-                //     image.src = farm11;
-                //     break;
-                // case 12:
-                //     image.src = farm12;
-                //     break;
-                // case 13:
-                //     image.src = farm13;
-                //     break;
-                // case 14:
-                //     image.src = farm14;
-                //     break;
-                // case 15:
-                //     image.src = farm15;
-                    // break;
                 default:
                     break;
             }
@@ -228,28 +200,38 @@ export default {
                 document.querySelector('.image-container img:nth-of-type(6)').style.opacity = 1;
             }, 400);
             setTimeout(() => {
-                document.querySelector('.bottom-wrapper').style.opacity = 1;
-            }, 1600)
-            setTimeout(() => {
-                document.querySelector('.loading-wrapper').style.top = '35px';
-            }, 2000);
-            setTimeout(() => {
-                // document.querySelector('.bottom-wrapper').style.opacity = 1;
-                document.querySelector('.step1').style.opacity = 1;
-                document.querySelector('.step1').style.top = '213px';
-                vue_obj.registerScroll();
-            }, 2200);
-            
+                document.querySelector('.lang-select').style.opacity = 1;
+            }, 650);
+        },
+        setLang: function(lang) {
+            if(lang) {
+                this.lang = lang;
+                document.querySelector('.lang-select').style.transition = 'all 0.3s';
+                document.querySelector('.lang-select').style.opacity = 0;
+                this.changeStep(0)
+            }
         },
         changeStep: function(direction = 1, context = null) {
             var vue_obj = this;
             switch (this.step + direction) {
                 case 0:
+                    setTimeout(() => {
+                        document.querySelector('.bottom-wrapper').style.opacity = 1;
+                    }, 0)
+                    setTimeout(() => {
+                        document.querySelector('.loading-wrapper').style.top = '35px';
+                    }, 400);
+                    setTimeout(() => {
+                        // document.querySelector('.bottom-wrapper').style.opacity = 1;
+                        document.querySelector('.step1').style.opacity = 1;
+                        document.querySelector('.step1').style.pointerEvents = 'auto';
+                        document.querySelector('.step1').style.top = '213px';
+                        vue_obj.registerScroll();
+                    }, 600);
                     break;
                 case 1:
                     document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*3)+"vh";
                     if(!darkMode) {
-                        console.log(document.querySelector('.bottom-wrapper').style.opacity)
                         document.querySelector('#cw').style.background = '#99d6ea';
                         document.querySelector('.bottom-wrapper').style.opacity = 0.75;
                     } else {
@@ -329,11 +311,11 @@ export default {
                     document.querySelector('.step2').style.top = topStep2 + 'px';
                     var sign = '+';
                     var other = 'community';
-                    var contextCta = "Entamez le dialogue";
+                    var contextCta = this.translations[this.lang].step3_cta_producer;
                     if(context == 'community') {
                         sign = '-';
                         other = 'producer';
-                        contextCta = 'Réservez votre place';
+                        contextCta = this.translations[this.lang].step3_cta_client;
                     }
                     var insideAnimation = function() {
                         setTimeout(() => {
@@ -469,28 +451,28 @@ export default {
                     } else if(animStep == 2) {
                         prevision.style.opacity = 0;
                         prevision.style.bottom = '380px';
-                        prevision.style.right = '230px';
+                        // prevision.style.left = 'calc(50% + 60px)';
                     } else if(animStep == 3) {
                         love.style.opacity = 0;
                         love.style.bottom = '280px';
-                        if(newStep != 4) {
+                        // if(newStep != 4) {
                             personRight.style.opacity = 0;
                             personRight.style.right = '-40px';
                             personRight.style.transform = 'unset';
-                        }
+                        // }
                     }
                     else if(animStep == 4) {
                         personLeft.style.transform = 'unset';
                         personLeft.style.left = '-40px';
-                        if(newStep != 1 || newStep != 2) {
-                            personLeft.style.opacity = 0;
-                        }
+                        // if(newStep != 1 || newStep != 2) {
+                        //     personLeft.style.opacity = 0;
+                        // }
                         personRight.style.transform = 'unset';
                         personRight.style.right = '-40px';
-                        if(newStep != 3) {
-                            personRight.style.opacity = 0;
-                        }
-                        coordination.style.bottom = '380px';
+                        // if(newStep != 3) {
+                        //     personRight.style.opacity = 0;
+                        // }
+                        coordination.style.bottom = '280px';
                         coordination.style.opacity = 0;
                     } else if(animStep == 5) {
                         produce.style.bottom = '100px';
@@ -509,8 +491,8 @@ export default {
                             form.style.right = '150px';
                         }
                         if(newStep != 2) {
-                            prevision.style.bottom = '310px';
-                            prevision.style.right = '150px';
+                            prevision.style.bottom = '299px';
+                            prevision.style.left = 'calc(50% + 150px)';
                         }
                         if(newStep != 3) {
                             love.style.bottom = '200px';
@@ -545,8 +527,8 @@ export default {
                             personLeft.style.bottom = '180px';
                             setTimeout(() => {
                                prevision.style.opacity = 1;
-                               prevision.style.bottom = '310px';
-                               prevision.style.right = '230px';
+                               prevision.style.bottom = '299px';
+                               prevision.style.left = 'calc(50% + 60px)';
                             }, 250);
                             break;
                         case 3:
@@ -562,19 +544,19 @@ export default {
                         case 4:
                             personLeft.style.transform = 'unset';
                             personLeft.style.left = '55px';
-                            personLeft.style.opacity = 1;
+                            personLeft.style.opacity = 0;
                             personLeft.style.bottom = '180px';
                             personRight.style.right = '55px';
                             personRight.style.transform = 'unset';
-                            personRight.style.opacity = 1;
+                            personRight.style.opacity = 0;
                             personRight.style.bottom = '180px';
                             // setTimeout(() => {
-                                coordination.style.bottom = '295px';
+                                coordination.style.bottom = '175px';
                                 coordination.style.opacity = 1;
                             // }, 250)
                             break;
                         case 5:
-                            produce.style.bottom = '115px';
+                            produce.style.bottom = '110px';
                             produce.style.opacity = 1;
                             break;
                         default:
@@ -696,7 +678,7 @@ export default {
                 data
             );
             console.log(response)
-        }
+        },
     },
 }
 </script>
@@ -711,7 +693,7 @@ export default {
     .loading-wrapper {
         position:absolute;
         left:50%;
-        top:calc(50% - 62.5px);
+        top:calc(50% - 142.5px);
         transform: translateX(-50%);
         transition:all 1s;
         max-width: 800px;
@@ -767,7 +749,7 @@ export default {
     .landing-wrapper.step1 {
         z-index:4;
         transition: all 0.2s;
-
+        pointer-events:none;
     }
     .bottom-wrapper {
         z-index:1;
@@ -887,12 +869,14 @@ export default {
     }
     .prevision {
         width:110px;
-        right:150px;
-        bottom:310px;
+        left:calc(50% + 150px);
+        bottom:299px;
+        /* border-radius:300px; */
+        /* border:1px solid white; */
     }
     .coordination {
-        bottom:380px;
-        width:150px;
+        bottom:280px;
+        width:250px;
         left:50%;
         transform: translateX(-50%);
     }
@@ -916,6 +900,12 @@ export default {
     /* .bottom-wrapper {
         opacity:0!important;
     } */
+    .lang-select {
+        z-index:10000;
+        opacity:0;
+        transition:all 1s;
+        color:#FFFFFF
+    }
 
 @media only screen and (max-width: 1060px) {
     .landing-wrapper.step2 {
@@ -925,10 +915,13 @@ export default {
         width:100%;
         margin:auto
     }
+    .first-b {
+        margin:auto;
+    }
 }
 
 
-@media only screen and (max-width: 810px) {
+@media only screen and (max-width: 675px) {
     .landing-wrapper {
         max-width: 100%;
     }
@@ -944,6 +937,13 @@ export default {
         width:calc(100% - 40px);
         margin:auto
     }
+    .box-producer .first-b {
+        padding-top:0px !important;
+        margin-top:0px !important;
+    }
+    .box-producer .button {
+        margin-top:30px;
+    }
     .button {
         max-width:calc(100% - 40px);
         margin:auto;
@@ -958,6 +958,19 @@ export default {
     /* .bottom-wrapper {
         opacity:0!important;
     } */
+    h2 {
+        font-size:24px;
+    }
+    .text-regular {
+        font-size:16px;
+        line-height:20px;
+    }
+    .step1 p.pos-abs {
+        bottom: 115px;
+        left: 50%;
+        width: calc(100% - 10px);
+        transform: translateX(-50%);
+    }
 }
 
     
