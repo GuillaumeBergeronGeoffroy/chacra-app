@@ -57,6 +57,7 @@ button, div .button {
 .max-w-1500 { max-width: 1500px; }
 .max-w-1100 { max-width: 1100px; }
 .max-w-850 { max-width: 850px; }
+.max-w-650 { max-width: 650px; }
 .max-w-360 { max-width: 360px; }
 .max-w-300 { max-width: 300px; }
 .max-w-265 { max-width: 265px; }
@@ -161,19 +162,22 @@ input:focus::placeholder {
 .p-bot-30 { padding-bottom:30px; }
 
 /* Margins */
+.m-auto-imp { margin:auto !important; }
+.m-auto { margin:auto; }
 .m-0 { margin:0; }
-.m-top-5 { margin-top:5px; }
-.m-top-10 { margin-top:10px; }
-.m-top-15 { margin-top:15px; }
-.m-top-20 { margin-top:20px; }
-.m-top-25 { margin-top:25px; }
+.m-top-60 { margin-top:60px; }
 .m-top-30 { margin-top:30px; }
-.m-bottom-5 { margin-bottom:5px; }
-.m-bottom-10 { margin-bottom:10px; }
-.m-bottom-15 { margin-bottom:15px; }
-.m-bottom-20 { margin-bottom:20px; }
-.m-bottom-25 { margin-bottom:25px; }
+.m-top-25 { margin-top:25px; }
+.m-top-20 { margin-top:20px; }
+.m-top-15 { margin-top:15px; }
+.m-top-10 { margin-top:10px; }
+.m-top-5 { margin-top:5px; }
 .m-bottom-30 { margin-bottom:30px; }
+.m-bottom-25 { margin-bottom:25px; }
+.m-bottom-20 { margin-bottom:20px; }
+.m-bottom-15 { margin-bottom:15px; }
+.m-bottom-10 { margin-bottom:10px; }
+.m-bottom-5 { margin-bottom:5px; }
 
 
 /* Text Type */

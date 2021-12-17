@@ -52,6 +52,20 @@
                     </div>
                 </div>
                 <div @click='changeStep()' class='button m-top-20' style='max-width:350px;'>{{ translations[lang].step1_cta }}</div>
+                <div class='step4-text m-auto max-w-650'>
+                    <p class='text-regular text-center m-0' style='font-size:42px;'>
+                        {{ translations[lang].step4_text }}
+                    </p>
+                    <h2 class='text-center m-0 m-top-60'>
+                        {{ translations[lang].step4_know }}
+                    </h2>
+                    <p class='text-regular text-center m-0 m-top-30'>
+                        {{ didYouKnow_text }}
+                    </p>
+                    <p class='text-regular text-center m-0 clickable' style='font-size:42px;color:#FFF;margin-top:2em;' @click='resetFlow'>
+                        ↻
+                    </p>
+                </div>
             </div>
         </div>
         <div class='landing-wrapper step2 flex-row justify-between'>
@@ -117,6 +131,8 @@ export default {
     name: 'Landing',
     data: function() {
         return {
+            completedFlow: null,
+            didYouKnow_text: "",
             step: 0,
             name: "",
             email: "",
@@ -143,18 +159,22 @@ export default {
                     step3_email_placeholder: "Veuillez entrer votre addresse courriel",
                     step3_cta_producer: "Entamez le dialogue",
                     step3_cta_client: "Réservez votre place",
+                    step4_text: "❤",
+                    step4_know: "Saviez-vous que...?",
+                    step4_know1: "Au Pérou, la petite ferme est appelée chacra. Le terme chacra vient du mot quechua chakra. Communément utilisé au Pérou, nous le retrouvons à travers le continent sudaméricain pour désigner une ferme.",
+                    step4_know2: "En Amérique du Nord, il y a plus de 2 millions de petites fermes ou fermes familiales, soit plus de 90% des exploitations agricoles. Ces entreprises garantissent la sécurité alimentaire de millions d'individus à travers le continent.",
                 },
                 'en': {
                     step1_text: "Chacra aims to transform the nature of food supply chains with its digital collaborative economy platform that puts producers and consumers in direct contact. Our inclusive approach enhances the agricultural professions and supports the development of human, local and organic agriculture to ensure food self-sufficiency in the future.",
                     step1_cta: "How does it work?",
-                    step1_anim_1: "Producers register and we assist them in personalizing their profile so that the image they present is as authentic as possible.",
+                    step1_anim_1: "Producers sign-up and we assist them in personalizing their profile so that the image they present is as authentic as possible.",
                     step1_anim_2: "They define the units, prices and availability of their products based on their production forecasts.",
                     step1_anim_3: "Community members browse the profiles and products of the producers and “adopt” shares of the production.",
                     step1_anim_4: "The producers work together with nature to ensure the maturation of the products.",
                     step1_anim_5: "The products are delivered to the member of the community.",
                     step1_anim_cta: "Join our community",
                     step2_title_producer: "<span>Y</span><span>o</span><span>u</span> <span>a</span><span>r</span><span>e</span> <span>a</span> <span>p</span><span>r</span><span>o</span><span>d</span><span>u</span><span>c</span><span>e</span><span>r</span> <span class='text-600'>?</span>",
-                    step2_title_client: "<span>Y</span><span>o</span><span>u</span> <span>l</span><span>i</span><span>k</span><span>e</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span>f</span><span>o</span><span>o</span><span>d</span> <span class='text-600'>?</span>",
+                    step2_title_client: "<span>Y</span><span>o</span><span>u</span> <span>l</span><span>o</span><span>v</span><span>e</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span>f</span><span>o</span><span>o</span><span>d</span> <span class='text-600'>?</span>",
                     step2_text_producer: "Our platform gives you a space where you can tell your story to a community of people who seek to choose and act for the best. We want to help you secure the future of your work.",
                     step2_text_client: "By adopting the production of your local producers on the platform, you directly support their project while ensuring you make consumption choices that meet your criteria.",
                     step2_cta_producer: "Introduce yourself to the community",
@@ -165,6 +185,10 @@ export default {
                     step3_email_placeholder: "Please enter your email address",
                     step3_cta_producer: "Start the dialogue",
                     step3_cta_client: "Save your spot",
+                    step4_text: "❤",
+                    step4_know: "Did you know...?",
+                    step4_know1: "In Peru, the small farm is called chacra. The term chacra comes from the Quechua word chakra. Commonly used in Peru, we find it across the South American continent to denote a farm.",
+                    step4_know2: "In North America, there are more than 2 million small farms and family farms, or more than 90% of agricultural operations. These companies ensure food security for millions of people across the continent.",
                 }
             }
         }
@@ -175,13 +199,13 @@ export default {
     destroyed() {
     },
     mounted() {
-        // this.init()
+        this.completedFlow = document.cookie.match(/^(.*;)?\s*completedFlow\s*=\s*[^;]+(.*)?$/)
         document.title = 'Chacra CrowdFarming'
     },
     methods: {
         init: async function() {
             // var vue_obj = this;
-            farmNum = Math.ceil(Math.random() * 1);
+            farmNum = 1;
             var image = new Image();
             image.onload = function () {
                 document.querySelector('.bottom-wrapper').style.background = 'url(' + image.src + ') no-repeat center';
@@ -232,11 +256,16 @@ export default {
             if(lang) {
                 this.lang = lang;
                 document.querySelector('.lang-select').style.transition = 'all 0.3s';
-                document.querySelector('.lang-select').style.opacity = 0;
+                document.querySelector('.lang-select').style.opacity = 0;                
+                document.querySelector('.lang-select').style.pointerEvents = 'none';
+                this.didYouKnow_text = this.translations[this.lang]["step4_know"+Math.ceil(Math.random() * 2)];
                 this.changeStep(0)
             }
         },
         changeStep: function(direction = 1, context = null) {
+            if(inTransition) {
+                return
+            }
             var vue_obj = this;
             switch (this.step + direction) {
                 case 0:
@@ -247,10 +276,21 @@ export default {
                         document.querySelector('.loading-wrapper').style.top = '35px';
                     }, 400);
                     setTimeout(() => {
+                        if(vue_obj.completedFlow) {
+                            document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*8)+"vh";
+                            document.querySelector('#cw').style.background = 'rgb(255 255 255)';
+                            document.querySelector('.bottom-wrapper').style.opacity = 0.3;
+                            document.querySelector('.step1 .box').style.display = 'none';
+                            document.querySelector('.step1 .button').style.display = 'none';
+                            document.querySelector('.step1 .step4-text').style.display = 'block';
+                            document.querySelector('.step1 .step4-text').style.opacity = 1;
+                            document.querySelector('.step1').style.top = '278px';
+                        } else {
+                            document.querySelector('.step1').style.top = '213px';
+                        }
                         // document.querySelector('.bottom-wrapper').style.opacity = 1;
                         document.querySelector('.step1').style.opacity = 1;
                         document.querySelector('.step1').style.pointerEvents = 'auto';
-                        document.querySelector('.step1').style.top = '213px';
                         vue_obj.registerScroll();
                     }, 600);
                     break;
@@ -318,6 +358,10 @@ export default {
                     this.step += direction
                     break;
                 case 3: 
+                    document.querySelector('.step1 .box').style.display = 'none';
+                    document.querySelector('.step1 .button').style.display = 'none';
+                    document.querySelector('.step1 .step4-text').style.display = 'block';
+                    document.querySelector('.step1').style.top = '200px';
                     // document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*3)+"vh";
                     // left only if window , in any case get them in display block after the transition is over
                     // will only have the inside transition if mobile
@@ -399,10 +443,6 @@ export default {
                                             document.querySelector('.box-'+context +' .button').textContent = contextCta
                                             document.querySelector('.box-'+context +' .button').style.opacity = 1;
 
-                                            setTimeout(() => {
-                                                document.querySelector('.box-'+context + ' .first-b').style.border = 'none';
-                                            }, 650); 
-
                                             inTransition = false;
                                             vue_obj.$forceUpdate();                                            
                                         }
@@ -447,6 +487,25 @@ export default {
                     // setTimeout(() => {
                     //     inTransition = false;
                     // }, 800);
+                    this.step += direction
+                    break;
+                case 4:
+                    document.cookie = "completedFlow=true; expires=Sun, 1 Jan 2023 12:00:00 UTC";
+                    inTransition = true;
+                    top = 35;
+                    document.querySelector('.loading-wrapper').style.top = top + 'px'
+                    document.querySelector('.step2').style.transition = 'all 0.5s';
+                    document.querySelector('.step2').style.top =  '413px';
+                    document.querySelector('.step2').style.pointerEvents = 'none';
+                    document.querySelector('.step2').style.opacity = 0;
+                    document.querySelector('.step1').style.transition = 'all 1s';
+                    document.querySelector('.step1').style.opacity = 1;
+                    document.querySelector('.step1').style.pointerEvents = 'auto';
+                    document.querySelector('.step1').style.top = topStep2 + 'px';
+                    document.querySelector('.step4-text').style.opacity = 1;
+                    setTimeout(() => {
+                        inTransition = false;
+                    }, 800);
                     this.step += direction
                     break;
                 default:
@@ -719,8 +778,14 @@ export default {
                 '/subscribe',
                 data
             );
-            console.log(response)
+            if(response) {
+                this.changeStep(1)
+            }
         },
+        resetFlow: function() {
+            document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+            location.reload();
+        }
     },
 }
 </script>
@@ -790,6 +855,7 @@ export default {
     }
     .landing-wrapper.step1 {
         z-index:4;
+        width:100%;
         transition: all 0.7s;
         pointer-events:none;
     }
@@ -948,6 +1014,15 @@ export default {
         transition:all 1s;
         color:#FFFFFF
     }
+    .step4-text {
+        display:none;
+        opacity:0;
+        transition:all 0.5s;
+    }
+    .first-b, .desc-b, .name-b, .email-b {
+        margin:auto !important;
+        margin-top:1em !important;
+    }
 
 @media only screen and (max-width: 1060px) {
     .landing-wrapper.step2 {
@@ -959,9 +1034,6 @@ export default {
     }
     .box-community:not(.final-step) {
         margin-top:50px !important;
-    }
-    .first-b {
-        margin:auto !important;
     }
 }
 
