@@ -5,12 +5,12 @@
                  <!-- <img class='moon opacity-0' src='../asset/images/moon.png' /> -->
              </div>
              <div class='image-container pos-abs disable-click' @click='toggleDarkMode()'>
-                <img src='../asset/images/loader/tree.png' />
-                <img src='../asset/images/loader/tree1.png' />
-                <img src='../asset/images/loader/tree2.png' />
-                <img src='../asset/images/loader/tree3.png' />
-                <img src='../asset/images/loader/tree4.png' />
-                <img src='../asset/images/loader/tree5.png' />
+                <img src='../asset/images/loader/tree.png'   rel="preload" @load='init'/>
+                <img src='../asset/images/loader/tree1.png'  rel="preload"/>
+                <img src='../asset/images/loader/tree2.png'  rel="preload"/>
+                <img src='../asset/images/loader/tree3.png'  rel="preload"/>
+                <img src='../asset/images/loader/tree4.png'  rel="preload"/>
+                <img src='../asset/images/loader/tree5.png'  rel="preload" />
              </div>
             <h1 class='text-center armatic'><span>C</span><span>h</span><span>a</span><span>c</span><span>r</span><span>a</span> <span>C</span><span>r</span><span>o</span><span>w</span><span>d</span><span>F</span><span>a</span><span>r</span><span>m</span><span>i</span><span>n</span><span>g</span></h1>
             <div class='flex-row text-center align-center justify-center m-top-30 text-regular clickable lang-select'>
@@ -110,6 +110,8 @@ var animStep = 0;
 var darkMode = false;
 var saveOpacity = 1;
 var farmNum = 1;
+var lastY = null;
+var inTouch = null;
 
 export default {
     name: 'Landing',
@@ -122,12 +124,13 @@ export default {
             translations: {
                 'fr' : {
                     step1_text: "Chacra ambitionne transformer la nature des chaînes d'approvisionnement alimentaire avec sa plateforme numérique d'économie collaborative qui met en relation directe les producteurs et les consommateurs. Notre approche inclusive revalorise les métiers agricoles et soutien le développement d'une agriculture humaine, locale et biologique pour assurer l'autonomie alimentaire de demain.",
+                    step1_cta: "Comment ça marche ?",
                     step1_anim_1: "Les producteurs s'inscrivent et nous les accompagnons dans la personnalisation de leur profil pour que l'image qu'ils présentent soit la plus authentique que possible.",
                     step1_anim_2: "Ils définissent les unités, les prix et les disponibilités de leurs produits en fonction des prévisions de leur production saisonnière.",
-                    step1_anim_3: "Les membres de la communauté consultent les profils et produits des producteurs et en adoptent la production.",
+                    step1_anim_3: "Les membres de la communauté consultent les profils et produits des producteurs et «adoptent» une part de la production.",
                     step1_anim_4: "Les producteurs travaillent de concert avec la nature pour assurer la maturation des produits dans le temps.",
                     step1_anim_5: "Les produits sont acheminés du producteur au membre de la communauté.",
-                    step1_cta: "Comment ça marche ?",
+                    step1_anim_cta: "Joignez-vous à nous",
                     step2_title_producer: "<span>V</span><span>o</span><span>u</span><span>s</span> <span>ê</span><span>t</span><span>e</span><span>s</span> <span>p</span><span>r</span><span>o</span><span>d</span><span>u</span><span>c</span><span>t</span><span>e</span><span>u</span><span>r</span> <span class='text-600'>?</span>",
                     step2_title_client: "<span>V</span><span>o</span><span>u</span><span>s</span> <span>a</span><span>i</span><span>m</span><span>e</span><span>z</span> <span>m</span><span>a</span><span>n</span><span>g</span><span>e</span><span>r</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span class='text-600'>?</span>",
                     step2_text_producer: "Notre plateforme vous offre un espace ou vous pouvez raconter votre histoire à une communauté de gens qui cherchent à choisir et à agir pour le mieux. Nous voulons vous aider à sécuriser la pérennité de votre labeur.",
@@ -140,7 +143,24 @@ export default {
                     step3_cta_client: "Réservez votre place",
                 },
                 'en': {
-
+                    step1_text: "Chacra aims to transform the nature of food supply chains with its digital collaborative economy platform that puts producers and consumers in direct contact. Our inclusive approach enhances the agricultural professions and supports the development of human, local and organic agriculture to ensure food self-sufficiency in the future.",
+                    step1_cta: "How does it work?",
+                    step1_anim_1: "Producers register and we assist them in personalizing their profile so that the image they present is as authentic as possible.",
+                    step1_anim_2: "They define the units, prices and availability of their products based on their production forecasts.",
+                    step1_anim_3: "Community members browse the profiles and products of the producers and “adopt” shares of the production.",
+                    step1_anim_4: "The producers work together with nature to ensure the maturation of the products.",
+                    step1_anim_5: "The products are delivered to the member of the community.",
+                    step1_anim_cta: "Join the community",
+                    step2_title_producer: "<span>Y</span><span>o</span><span>u</span> <span>a</span><span>r</span><span>e</span> <span>a</span> <span>p</span><span>r</span><span>o</span><span>d</span><span>u</span><span>c</span><span>e</span><span>r</span> <span class='text-600'>?</span>",
+                    step2_title_client: "<span>Y</span><span>o</span><span>u</span> <span>l</span><span>i</span><span>k</span><span>e</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span>f</span><span>o</span><span>o</span><span>d</span> <span class='text-600'>?</span>",
+                    step2_text_producer: "Our platform gives you a space where you can tell your story to a community of people who seek to choose and act for the best. We want to help you secure the future of your work.",
+                    step2_text_client: "By adopting the production of your local producers on the platform, you directly support their project while ensuring you make consumption choices that meet your criteria.",
+                    step2_cta_producer: "Introduce yourself to the community",
+                    step2_cta_client: "Support your local producers",
+                    step3_text_producer: "Let's secure your spot on the platform at launch, enter your information and we'll get back to you shortly",
+                    step3_text_client: "Save your spot and get pre-access to the platform",
+                    step3_cta_producer: "Start the dialogue",
+                    step3_cta_client: "Save your spot",
                 }
             }
         }
@@ -151,7 +171,8 @@ export default {
     destroyed() {
     },
     mounted() {
-        this.init()
+        // this.init()
+        document.title = 'Chacra CrowdFarming'
     },
     methods: {
         init: async function() {
@@ -400,6 +421,8 @@ export default {
                         }, 100);
                         insideAnimation()
                     } else {
+                        document.querySelector('.box-community').classList.add('final-step');
+                        document.querySelector('.box-'+other).style.display = 'none';
                         insideAnimation()
                     }
                    
@@ -572,7 +595,7 @@ export default {
                     if(animStep > 0) {
                         document.querySelector('.step1 p.pos-abs:nth-of-type('+(animStep+1)+')').style.bottom = '115px';
                     } else {
-                        document.querySelector('.step1 .button').textContent = "Joignez-vous à nous";   
+                        document.querySelector('.step1 .button').textContent = vue_obj.translations[vue_obj.lang].step1_anim_cta;   
                         document.querySelector('.step1 .button').style.opacity = 1;     
                         document.querySelector('.step1 .button').style.pointerEvents = 'none';                                 
                     }
@@ -630,8 +653,25 @@ export default {
             if(!inTransition) {
                 var change = 0;
             //     inScroll = true;
-                switch (event.type) {
+                switch (event.type) { 
+                    case 'touchmove':
+                        if(!inTouch) {
+                            var currentY = event.touches[0].clientY;
+                            console.log(currentY, lastY)
+                            if(currentY > lastY){
+                                change -= 30
+                            } else if(currentY < lastY  && top < 35){
+                                change += 30;
+                            }
+                            lastY = currentY;
+                            inTouch = setTimeout(() => {
+                                inTouch = null;
+                            },1);
+                        }
+                        
+                        break;
                     case 'wheel':
+                        console.log(event.deltaY)
                         if(event.deltaY > 0) {
                             change -= 50;
                         } else if(event.deltaY < 0 && top < 35) {
@@ -915,8 +955,11 @@ export default {
         width:100%;
         margin:auto
     }
+    .box-community:not(.final-step) {
+        margin-top:50px !important;
+    }
     .first-b {
-        margin:auto;
+        margin:auto !important;
     }
 }
 

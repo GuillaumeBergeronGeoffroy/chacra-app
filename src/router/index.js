@@ -8,7 +8,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Chacra CrowdFarming',
+    name: 'Landing',
     component: Landing
   },
 ]
