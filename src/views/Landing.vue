@@ -70,8 +70,8 @@
                         {{ translations[lang].step3_text_producer }}
                     </p>
                 </div>
-                <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
-                <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
+                <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" :placeholder='translations[lang].step3_name_placeholder' /></div>
+                <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" :placeholder='translations[lang].step3_email_placeholder' /></div>
                 <div @click='step == 3 ? subscribe("Producer") : changeStep(1, "producer")' :class="{ 'disable-click': !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)), 'button-enabled' : step == 3 && name.trim() && $root.isEmailValid(email) }" class='button max-w-360' style='margin-top:40px;'>{{ translations[lang].step2_cta_producer }}</div>
             </div>
             <div class='box-community'>
@@ -87,8 +87,8 @@
                         {{ translations[lang].step3_text_client }}
                     </p>
                 </div>
-                <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" placeholder='Veuillez entrer votre nom' /></div>
-                <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" placeholder='Veuillez entrer votre addresse courriel' /></div>
+                <div class='box p-30 opacity-0 hide name-b'><input class='text-regular text-center' v-model="name" :placeholder='translations[lang].step3_name_placeholder' /></div>
+                <div class='box p-30 opacity-0 hide email-b'><input class='text-regular text-center' v-model="email" :placeholder='translations[lang].step3_email_placeholder' /></div>
                 <div @click='step == 3 ? subscribe("User") : changeStep(1, "community")' :class="{ 'disable-click': !evalInTransition() && step == 3 && (!name.trim() || !$root.isEmailValid(email)), 'button-enabled' : step == 3 && name.trim() && $root.isEmailValid(email) }" class='button max-w-360' style='margin-top:40px;'>{{ translations[lang].step2_cta_client }}</div>
             </div>
         </div>
@@ -139,6 +139,8 @@ export default {
                     step2_cta_client: "Supportez vos producteurs locaux",
                     step3_text_producer: "Assurons votre place sur la plateforme au lancement, entrez vos informations et nous vous contacterons sous peu",
                     step3_text_client: "Réservez votre place pour avoir accès à la plateforme en avant-première",
+                    step3_name_placeholder: "Veuillez entrer votre nom",
+                    step3_email_placeholder: "Veuillez entrer votre addresse courriel",
                     step3_cta_producer: "Entamez le dialogue",
                     step3_cta_client: "Réservez votre place",
                 },
@@ -159,6 +161,8 @@ export default {
                     step2_cta_client: "Support your local producers",
                     step3_text_producer: "Let's secure your spot on the platform at launch, enter your information and we'll get back to you shortly",
                     step3_text_client: "Save your spot and get pre-access to the platform",
+                    step3_name_placeholder: "Please enter your name",
+                    step3_email_placeholder: "Please enter your email address",
                     step3_cta_producer: "Start the dialogue",
                     step3_cta_client: "Save your spot",
                 }
@@ -498,7 +502,7 @@ export default {
                         coordination.style.bottom = '220px';
                         coordination.style.opacity = 0;
                     } else if(animStep == 5) {
-                        produce.style.bottom = '100px';
+                        produce.style.bottom = '90px';
                         produce.style.opacity = 0;
                     }
                     if(newStep == 3 || newStep == 5) {
@@ -921,7 +925,7 @@ export default {
     .produce {
         left:50%;
         transform: translateX(-50%);
-        bottom:100px;
+        bottom:90px;
         width:355px;
         transition:all 0.5s;
     }
