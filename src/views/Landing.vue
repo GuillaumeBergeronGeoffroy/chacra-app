@@ -520,12 +520,12 @@ export default {
                         if(newStep != 3) {
                             love.style.bottom = '200px';
                         }
-                        if(newStep != 4) {
-                            console.log('tmp')
-                        }
-                        if(newStep != 5) {
-                            console.log('tmp')
-                        }
+                        // if(newStep != 4) {
+                        //     console.log('tmp')
+                        // }
+                        // if(newStep != 5) {
+                        //     console.log('tmp')
+                        // }
                     }, 1000);
                 }
                 setTimeout(() => {
@@ -657,21 +657,19 @@ export default {
                     case 'touchmove':
                         if(!inTouch) {
                             var currentY = event.touches[0].clientY;
-                            console.log(currentY, lastY)
                             if(currentY > lastY){
                                 change -= 30
                             } else if(currentY < lastY  && top < 35){
                                 change += 30;
                             }
                             lastY = currentY;
-                            inTouch = setTimeout(() => {
+                            inTouch = setTimeout(() => {d
                                 inTouch = null;
                             },1);
                         }
                         
                         break;
                     case 'wheel':
-                        console.log(event.deltaY)
                         if(event.deltaY > 0) {
                             change -= 50;
                         } else if(event.deltaY < 0 && top < 35) {
@@ -717,7 +715,6 @@ export default {
                 '/subscribe',
                 data
             );
-            console.log(response)
         },
     },
 }
