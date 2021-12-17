@@ -150,7 +150,7 @@ export default {
                     step1_anim_3: "Community members browse the profiles and products of the producers and “adopt” shares of the production.",
                     step1_anim_4: "The producers work together with nature to ensure the maturation of the products.",
                     step1_anim_5: "The products are delivered to the member of the community.",
-                    step1_anim_cta: "Join the community",
+                    step1_anim_cta: "Join our community",
                     step2_title_producer: "<span>Y</span><span>o</span><span>u</span> <span>a</span><span>r</span><span>e</span> <span>a</span> <span>p</span><span>r</span><span>o</span><span>d</span><span>u</span><span>c</span><span>e</span><span>r</span> <span class='text-600'>?</span>",
                     step2_title_client: "<span>Y</span><span>o</span><span>u</span> <span>l</span><span>i</span><span>k</span><span>e</span> <span>l</span><span>o</span><span>c</span><span>a</span><span>l</span> <span>f</span><span>o</span><span>o</span><span>d</span> <span class='text-600'>?</span>",
                     step2_text_producer: "Our platform gives you a space where you can tell your story to a community of people who seek to choose and act for the best. We want to help you secure the future of your work.",
@@ -486,16 +486,16 @@ export default {
                     }
                     else if(animStep == 4) {
                         personLeft.style.transform = 'unset';
-                        personLeft.style.left = '-40px';
+                        personLeft.style.left = '0px';
                         // if(newStep != 1 || newStep != 2) {
                         //     personLeft.style.opacity = 0;
                         // }
                         personRight.style.transform = 'unset';
-                        personRight.style.right = '-40px';
+                        personRight.style.right = '0px';
                         // if(newStep != 3) {
                         //     personRight.style.opacity = 0;
                         // }
-                        coordination.style.bottom = '280px';
+                        coordination.style.bottom = '220px';
                         coordination.style.opacity = 0;
                     } else if(animStep == 5) {
                         produce.style.bottom = '100px';
@@ -503,7 +503,7 @@ export default {
                     }
                     if(newStep == 3 || newStep == 5) {
                         personLeft.style.transform = 'unset';
-                        personLeft.style.left = '-40px';
+                        personLeft.style.left = '0px';
                         personLeft.style.opacity = 0;
                     }
                 }
@@ -536,7 +536,7 @@ export default {
                             personLeft.style.opacity = 1;
                             personLeft.style.left = '50%';
                             personLeft.style.transform = 'translateX(-50%)';
-                            personLeft.style.bottom = '200px';
+                            personLeft.style.bottom = '180px';
                             setTimeout(() => {
                                 form.style.opacity = 1;
                                 form.style.bottom = '300px';
@@ -562,7 +562,7 @@ export default {
                             setTimeout(() => {
                                 love.style.opacity = 1;
                                 love.style.bottom = '250px';
-                            }, 350);
+                            }, 550);
                             break;
                         case 4:
                             personLeft.style.transform = 'unset';
@@ -663,7 +663,7 @@ export default {
                                 change += 30;
                             }
                             lastY = currentY;
-                            inTouch = setTimeout(() => {d
+                            inTouch = setTimeout(() => {
                                 inTouch = null;
                             },1);
                         }
@@ -715,6 +715,7 @@ export default {
                 '/subscribe',
                 data
             );
+            console.log(response)
         },
     },
 }
@@ -785,7 +786,7 @@ export default {
     }
     .landing-wrapper.step1 {
         z-index:4;
-        transition: all 0.2s;
+        transition: all 0.7s;
         pointer-events:none;
     }
     .bottom-wrapper {
@@ -877,20 +878,20 @@ export default {
     .personLeft, .personRight {
         position:absolute;
         width:330px;
-        bottom:200px;
-        transition:all 0.5s;
+        bottom:180px;
+        transition:all .750s;
         opacity:0;
         pointer-events: none;
     }
     .personLeft {
-        left:-40px;
+        left:0px;
     }
     .personRight {
-        right:-40px;
+        right:0px;
     }
     .form, .prevision, .love, .coordination, .produce {
         position:absolute;
-        transition:all 0.5s;
+        transition:all 0.750s;
         opacity:0;
         pointer-events: none;
     }
@@ -912,7 +913,7 @@ export default {
         /* border:1px solid white; */
     }
     .coordination {
-        bottom:280px;
+        bottom:220px;
         width:250px;
         left:50%;
         transform: translateX(-50%);
