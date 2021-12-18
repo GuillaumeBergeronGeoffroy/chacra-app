@@ -44,7 +44,6 @@ button, div .button {
     background: #00000000;
     /* opacity: 0.5; */
     padding: 7px;
-    opacity: 0.;
     border-radius: 4px;
     color: #000000;
     cursor: pointer;
@@ -208,6 +207,7 @@ button:hover, div .button:hover, .button-enabled {
 
 /* Behaviour */
 .clickable { pointer-events:auto; cursor: pointer; }
+.pointer { cursor: pointer; }
 .disable { pointer-events:none; opacity:0.5 !important; }
 .disable-click { pointer-events:none; }
 

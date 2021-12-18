@@ -62,7 +62,7 @@
                     <p class='text-regular text-center m-0 m-top-30'>
                         {{ didYouKnow_text }}
                     </p>
-                    <p class='text-regular text-center m-0 clickable' style='font-size:42px;color:#FFF;margin-top:2em;' @click='resetFlow'>
+                    <p class='text-regular text-center m-0 pointer' style='font-size:42px;color:#FFF;margin-top:2em;' @click='resetFlow'>
                         ↻
                     </p>
                 </div>
@@ -114,8 +114,6 @@
 <script>
 // @ is an alias to /src
 
-import farm1 from '@/asset/images/landing/farms/farm1.jpg'
-
 var top = 35;
 var topStep2 = 278;
 var inTransition = false;
@@ -123,14 +121,14 @@ var completedAnim = false;
 var animStep = 0;
 var darkMode = false;
 var saveOpacity = 1;
-var farmNum = 1;
-var lastY = null;
-var inTouch = null;
+// var lastY = null;
+// var inTouch = null;
 
 export default {
     name: 'Landing',
     data: function() {
         return {
+            isMobile: false,
             completedFlow: null,
             didYouKnow_text: "",
             step: 0,
@@ -204,20 +202,8 @@ export default {
     },
     methods: {
         init: async function() {
-            // var vue_obj = this;
-            farmNum = 1;
-            var image = new Image();
-            image.onload = function () {
-                document.querySelector('.bottom-wrapper').style.background = 'url(' + image.src + ') no-repeat center';
-                document.querySelector('.bottom-wrapper').style.backgroundSize = 'cover'
-                document.querySelector('.bottom-wrapper').style.backgroundPositionY = 'top'
-            }
-            switch (farmNum) {
-                case 1:
-                    image.src = farm1;
-                    break;
-                default:
-                    break;
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                this.isMobile = true;
             }
             document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*1.3)+"vh";
             const animChar = async function() {
@@ -280,6 +266,7 @@ export default {
                             document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*8)+"vh";
                             document.querySelector('#cw').style.background = 'rgb(255 255 255)';
                             document.querySelector('.bottom-wrapper').style.opacity = 0.3;
+                            // document.querySelector('.step1').style.transition = 'all 3s';
                             document.querySelector('.step1 .box').style.display = 'none';
                             document.querySelector('.step1 .button').style.display = 'none';
                             document.querySelector('.step1 .step4-text').style.display = 'block';
@@ -291,11 +278,22 @@ export default {
                         // document.querySelector('.bottom-wrapper').style.opacity = 1;
                         document.querySelector('.step1').style.opacity = 1;
                         document.querySelector('.step1').style.pointerEvents = 'auto';
+                        if(this.isMobile) {
+                            document.querySelector('#cw').style.maxHeight = '130vh';
+                            document.querySelector('#cw').style.height = '130vh';
+                            document.querySelector('#cw').style.minHeight = '100vh';
+                        } else {
+                            document.querySelector('#cw').scrollTop = 0;
+                        }
                         vue_obj.registerScroll();
                     }, 600);
                     break;
                 case 1:
                     document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*3)+"vh";
+                    if(this.isMobile) {
+                        document.querySelector('#cw').style.maxHeight = 'unset';
+                        document.querySelector('#cw').style.height = '878px';
+                    }
                     if(!darkMode) {
                         document.querySelector('#cw').style.background = '#99d6ea';
                         document.querySelector('.bottom-wrapper').style.opacity = 0.75;
@@ -326,6 +324,9 @@ export default {
                     this.step += direction
                     break;
                 case 2: 
+                    if(this.isMobile) {
+                        document.querySelector('#cw').style.height = 278 + document.querySelector('.step2').offsetHeight + 100 + 'px';
+                    }
                     document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*8)+"vh";
                     if(!darkMode) {
                         document.querySelector('#cw').style.background = '#b8e0d2';
@@ -333,13 +334,13 @@ export default {
                     } else {
                         saveOpacity = 0.5
                     }
+                    inTransition = true;
+                    completedAnim = true;
+                    top = 35;
                     document.querySelector('.step1').style.pointerEvents = 'none';
                     document.querySelector('.anim-steps-nav').style.pointerEvents = 'none';
-                    completedAnim = true;
                     document.querySelector('.step1 p.pos-abs:not(.disable-click)').style.pointerEvents = 'none';
                     document.querySelector('.step1 .button').style.pointerEvents = 'none';
-                    inTransition = true;
-                    top = 35;
                     document.querySelector('.loading-wrapper').style.top = top + 'px'
                     setTimeout(() => { 
                         document.querySelector('.step1').style.transition = 'all 0.5s';
@@ -358,6 +359,9 @@ export default {
                     this.step += direction
                     break;
                 case 3: 
+                    if(this.isMobile) {
+                        document.querySelector('#cw').style.height = 278 + document.querySelector('.step2').offsetHeight + 100 + 'px';
+                    }
                     document.querySelector('.step1 .box').style.display = 'none';
                     document.querySelector('.step1 .button').style.display = 'none';
                     document.querySelector('.step1 .step4-text').style.display = 'block';
@@ -367,7 +371,7 @@ export default {
                     // will only have the inside transition if mobile
                     
                     // const insideTransition = func()() 
-                     if(!darkMode) {
+                    if(!darkMode) {
                         document.querySelector('#cw').style.background = 'rgb(255 255 255)';
                         document.querySelector('.bottom-wrapper').style.opacity = 0.3;
                     } else {
@@ -490,6 +494,9 @@ export default {
                     this.step += direction
                     break;
                 case 4:
+                    if(this.isMobile) {
+                        document.querySelector('#cw').style.height = 278 + document.querySelector('.step1').offsetHeight + 100 + 'px';
+                    }
                     document.cookie = "completedFlow=true; expires=Sun, 1 Jan 2023 12:00:00 UTC";
                     inTransition = true;
                     top = 35;
@@ -715,22 +722,21 @@ export default {
         handleScroll: function(event) {
             if(!inTransition) {
                 var change = 0;
-            //     inScroll = true;
                 switch (event.type) { 
                     case 'touchmove':
-                        if(!inTouch) {
-                            var currentY = event.touches[0].clientY;
-                            if(currentY > lastY){
-                                change -= 30
-                            } else if(currentY < lastY  && top < 35){
-                                change += 30;
-                            }
-                            lastY = currentY;
-                            inTouch = setTimeout(() => {
-                                inTouch = null;
-                            },1);
-                        }
-                        
+                        // event.preventDefault();
+                        // if(!inTouch) {
+                        //     var currentY = event.touches[0].clientY;
+                        //     if(currentY > lastY && top < 35){
+                        //         change += 30
+                        //     } else if(currentY < lastY){
+                        //         change -= 30;
+                        //     }
+                        //     lastY = currentY;
+                        //     inTouch = setTimeout(() => {
+                        //         inTouch = null;
+                        //     },1);
+                        // }
                         break;
                     case 'wheel':
                         if(event.deltaY > 0) {
@@ -752,7 +758,7 @@ export default {
                 top += change;
                 
                 document.querySelector('.loading-wrapper').style.top = top + 'px';
-                if(this.step == 1 || this.step == 2 || this.step == 3) {
+                if(this.step == 2 || this.step == 3) {
                     topStep2 += change;
                     document.querySelector('.step2').style.top = topStep2 + 'px';
                 }
@@ -775,6 +781,7 @@ export default {
             data[type + 'Name'] = vue_obj.name;
             response = await this.$root.request(
                 'SESSION_MANAGER',
+                // "//ec2-3-15-211-105.us-east-2.compute.amazonaws.com:3000",
                 '/subscribe',
                 data
             );
@@ -864,6 +871,9 @@ export default {
         transition: all 1s;
         opacity:0;
         width:100%;
+        background: url("../asset/images/landing/farms/farm1.jpg") no-repeat center; 
+        background-size: cover;
+        background-position-y: top;
     }
     /* .bottom-wrapper img {
         width: 2400%;
@@ -1000,9 +1010,11 @@ export default {
         padding-top:5px !important;
     }
     .name-b input {
+        border-radius: 0px !important;
         max-width:220px;
     } 
     .email-b input {
+        border-radius: 0px !important;
         max-width:325px;
     }
     /* .bottom-wrapper {
