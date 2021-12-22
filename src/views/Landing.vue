@@ -356,11 +356,16 @@ export default {
                         document.querySelector('.bottom-wrapper').style.opacity = 1;
                     }, 0)
                     setTimeout(() => {
-                        document.querySelector('.loading-wrapper').style.top = '75px';
+                        if(vue_obj.completedFlow) {
+                            document.querySelector('.loading-wrapper').style.top = '35px';
+                        } else {
+                            document.querySelector('.loading-wrapper').style.top = '75px';
+                        } 
                     }, 400);
                     setTimeout(() => {
                         if(vue_obj.completedFlow) {
                             this.step = 4;
+                            document.querySelector('.landing-menu').style.display = 'none';
                             document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*8)+"vh";
                             document.querySelector('#cw').style.background = 'rgb(255 255 255)';
                             document.querySelector('.bottom-wrapper').style.opacity = 0.3;
@@ -388,7 +393,7 @@ export default {
                     }, 600);
                     break;
                 case 1:
-                    document.querySelector('.landing-menu').style.transition = 'all 0.5s';
+                    document.querySelector('.landing-menu').style.transition = 'all 0s';
                     document.querySelector('.landing-menu').style.opacity = 0;
                     document.querySelector('.landing-menu').style.pointerEvents = 'none';
                     document.querySelector('.bottom-wrapper').style.height = (100/this.$root.scale*3)+"vh";
@@ -999,6 +1004,7 @@ export default {
         },
         resetFlow: function() {
             document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+            document.cookie = "lang="+this.lang+"; expires=Sun, 1 Jan 2023 12:00:00 UTC";
             location.reload();
         }
     },
