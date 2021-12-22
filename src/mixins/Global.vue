@@ -28,8 +28,7 @@
         methods: {
             request: async function(context, route, data = {}, response = {}) {
                 try {
-                    const rawResponse = await fetch(process.env["VUE_APP_" + context] + route, {
-                    // const rawResponse = await fetch(context + route, {
+                    const rawResponse = await fetch(context + route, {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',

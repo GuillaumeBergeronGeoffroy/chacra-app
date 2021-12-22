@@ -33,7 +33,7 @@ body { padding:0; margin:0; position:relative; color:#000000; }
 .pos-abs { position: absolute; }
 
 /* Buttons */
-button, div .button {
+button, .button {
     margin: auto;
     text-align: center;
     font-size: 18px;
@@ -165,18 +165,20 @@ input:focus::placeholder {
 .m-auto { margin:auto; }
 .m-0 { margin:0; }
 .m-top-60 { margin-top:60px; }
+.m-top-50 { margin-top:50px; }
+.m-top-40 { margin-top:40px; }
 .m-top-30 { margin-top:30px; }
 .m-top-25 { margin-top:25px; }
 .m-top-20 { margin-top:20px; }
 .m-top-15 { margin-top:15px; }
 .m-top-10 { margin-top:10px; }
 .m-top-5 { margin-top:5px; }
-.m-bottom-30 { margin-bottom:30px; }
-.m-bottom-25 { margin-bottom:25px; }
-.m-bottom-20 { margin-bottom:20px; }
-.m-bottom-15 { margin-bottom:15px; }
-.m-bottom-10 { margin-bottom:10px; }
-.m-bottom-5 { margin-bottom:5px; }
+.m-bot-30 { margin-bottom:30px; }
+.m-bot-25 { margin-bottom:25px; }
+.m-bot-20 { margin-bottom:20px; }
+.m-bot-15 { margin-bottom:15px; }
+.m-bot-10 { margin-bottom:10px; }
+.m-bot-5 { margin-bottom:5px; }
 
 
 /* Text Type */
@@ -199,7 +201,7 @@ input:focus::placeholder {
 .text-white { color: #FFFFFF; }
 .text-green { color: #46b056; }
 
-button:hover, div .button:hover, .button-enabled {
+button:hover, .button:hover, .button-enabled {
     background: #000000;
     color: #FFFFFF;
     /* border: 1px solid #FFFFFF; */
@@ -226,3 +228,9 @@ button:hover, div .button:hover, .button-enabled {
 /* Opacity */
 .opacity-1 { opacity: 1 !important; }
 .opacity-0 { opacity: 0 !important; }
+
+/* Manipulation */
+.rotate-180 {
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+}
